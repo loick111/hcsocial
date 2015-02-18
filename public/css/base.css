@@ -20,6 +20,12 @@ body
     background: white;
 }
 
+/* SECTIONS */
+
+section {
+    margin-top: 5px;
+}
+
 /* ARTICLES */
 
 article h1

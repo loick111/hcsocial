@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use SFramework\mvc\Controller;
 
-class LoginController extends Controller
+class UserController extends Controller
 {
 
     public function __construct()
@@ -14,11 +14,16 @@ class LoginController extends Controller
 
     public function index()
     {
-        $this->getView()->render('login/login');
+        $this->getView()->redirect('/user/login');
+    }
+
+    public function login()
+    {
+        $this->getView()->render('user/login');
     }
 
     public function signin()
     {
-        $this->getView()->render('login/signin');
+        $this->getView()->render('user/signin');
     }
 }
