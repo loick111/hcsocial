@@ -62,6 +62,7 @@ class Database extends \PDO
     public function execute($query, array $params = [])
     {
         $stmt = $this->prepare($query);
+
         return $stmt->execute($params);
     }
 
@@ -75,6 +76,7 @@ class Database extends \PDO
     {
         $stmt = $this->prepare($query);
         $stmt->execute($params);
+
         return $stmt->fetch();
     }
 }

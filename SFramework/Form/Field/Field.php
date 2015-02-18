@@ -50,6 +50,7 @@ abstract class Field
         if (!isset($this->attributes[$att])) {
             throw new AttributeNotExistsException($att);
         }
+
         return $this->attributes[$att];
     }
 

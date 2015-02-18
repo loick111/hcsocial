@@ -57,6 +57,7 @@ class DatabaseConfig
     public static function parseFromFile($fileName)
     {
         $configFile = new ConfigFileParser($fileName);
+
         return new self($configFile->getEntry("host"),
             $configFile->getEntry("user"),
             $configFile->getEntry("password"),

@@ -67,6 +67,7 @@ class FormHelper
         if (!empty($tmp)) {
             $type = $tmp[0];
         }
+
         return $type;
     }
 
@@ -97,6 +98,7 @@ class FormHelper
         if ($att['Key'] == 'PRI') {
             return 'hidden';
         }
+
         return 'text';
     }
 }

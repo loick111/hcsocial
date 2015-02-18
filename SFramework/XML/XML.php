@@ -8,9 +8,9 @@
 
 namespace SFramework\XML;
 
-use SplFileObject;
 use SFramework\Exceptions\XMLArrayBadFormatException;
 use SFramework\Exceptions\XMLNotWritableException;
+use SplFileObject;
 
 /**
  * This class creates a XML file (or rewrites it)

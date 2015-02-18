@@ -37,6 +37,7 @@ class Controller
         if ($classInfo->getParentClass()->isSubclassOf('SFramework\mvc\Model')) {
             throw new InvalidModelClassException($model);
         }
+
         return $classInfo->newInstance();
     }
 
@@ -50,6 +51,7 @@ class Controller
         if (empty($this->params) && !$ignore) {
             throw new MissingParamsException();
         }
+
         return $this->params;
     }
 

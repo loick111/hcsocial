@@ -22,10 +22,13 @@ class Input
     public static function get($key, $optional = false)
     {
         if (!isset($_GET[$key]) || empty($_GET[$key])) {
-            if (!$optional)
+            if (!$optional) {
                 throw new InputNotSetException('$_GET', $key);
+            }
+
             return null;
         }
+
         //TODO: Protect input $_GET
         return self::quote_smart($_GET[$key]);
     }
@@ -62,10 +65,13 @@ class Input
     public static function post($key, $optional = false)
     {
         if (!isset($_POST[$key])) {
-            if (!$optional)
+            if (!$optional) {
                 throw new InputNotSetException('$_POST', $key);
+            }
+
             return null;
         }
+
         //TODO: Protect input $_GET
         return self::quote_smart($_POST[$key]);
     }
@@ -79,8 +85,10 @@ class Input
     public static function session($key, $optional = false)
     {
         if (!isset($_SESSION[$key])) {
-            if (!$optional)
+            if (!$optional) {
                 throw new InputNotSetException('$_SESSION', $key);
+            }
+
             return null;
         }
 

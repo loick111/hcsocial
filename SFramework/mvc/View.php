@@ -19,8 +19,9 @@ class View extends \Twig_Environment
 
     public function __construct(\Twig_LoaderInterface $loader = null, $options = [])
     {
-        if (DEBUG)
+        if (DEBUG) {
             $options = array_merge($options, ['debug' => true]);
+        }
 
         parent::__construct($loader, $options);
         $this->addExtension(new Twig_Extension_Debug());
@@ -31,6 +32,7 @@ class View extends \Twig_Environment
     public function loadTemplate($name, $index = null)
     {
         $name = $name . '.twig';
+
         return parent::loadTemplate($name, $index);
     }
 

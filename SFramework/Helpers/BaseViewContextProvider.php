@@ -21,8 +21,9 @@ class BaseViewContextProvider
      */
     public static function provide()
     {
-        if (!isset(self::$contextProvider) || empty(self::$contextProvider))
+        if (!isset(self::$contextProvider) || empty(self::$contextProvider)) {
             return [];
+        }
 
         return call_user_func(self::$contextProvider);
     }

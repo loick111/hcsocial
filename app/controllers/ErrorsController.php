@@ -5,7 +5,8 @@ namespace app\controllers;
 
 use SFramework\mvc\Controller;
 
-class ErrorsController extends Controller{
+class ErrorsController extends Controller
+{
 
     public function err404()
     {
