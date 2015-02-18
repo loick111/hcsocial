@@ -28,6 +28,11 @@ function main()
 {
     $router = new \SFramework\Routing\Router();
 
+    $classRouting = new \SFramework\Routing\ClassRouting('\app\controllers\\');
+    $classRouting->addClass('Login');
+
+    $classRouting->generateRoute($router);
+
     $router->add('/errors/err404', new \app\controllers\ErrorsController(), 'err404');
     $router->add('/', new \app\controllers\HomeController(), 'index');
 

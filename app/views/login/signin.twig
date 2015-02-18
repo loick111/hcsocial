@@ -1,0 +1,20 @@
+{% extends 'layout/default' %}
+
+{% block content %}
+
+    <section>
+        <article class="cadre" id="login">
+            <h1>Inscription</h1>
+            <p id="form-error"></p>
+            <form action="" method="post">
+                <input type="text" name="username" id="username" placeholder="Nom d'utilisateur">
+                <input type="text" name="lastname" id="lastname" placeholder="Nom">
+                <input type="text" name="firstname" id="firstname" placeholder="Prénom">
+                <input type="password" name="password" id="password" placeholder="Mot de passe">
+                <input type="password" name="password2" id="password2" placeholder="Confirmation">
+                <input type="button" class="btn btn-primary" value="Inscription">
+            </form>
+        </article>
+    </section>
+
+{% endblock %}
