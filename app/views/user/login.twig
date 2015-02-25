@@ -2,20 +2,15 @@
 
 {% block content %}
 
-    <section>
-        <article class="cadre" id="login">
+    <div class="container">
+        <form action="/user/login" method="post" class="form-signin">
             <h1>Connexion</h1>
-            <form action="" method="post">
-                <input type="text" name="username" id="username" placeholder="Nom d'utilisateur">
-                <input type="password" name="password" id="password" placeholder="Mot de passe">
-                <input type="button" class="btn btn-primary" value="Connexion">
-            </form>
-
-            <ul>
-                <li><a href="">Mot de passe oublié ?</a></li>
-                <li><a href="/user/signin">Inscription</a></li>
-            </ul>
-        </article>
-    </section>
+            <label for="username" class="sr-only">Nom d'utilisateur</label>
+            <input type="text" name="username" class="form-control" placeholder="Nom d'utilisateur" required autofocus>
+            <label for="password" class="sr-only">Mot de passe</label>
+            <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
+            <input type="submit" class="btn btn-block btn-primary" value="Connexion">
+        </form>
+    </div>
 
 {% endblock %}

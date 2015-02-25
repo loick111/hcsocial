@@ -22,6 +22,15 @@ class UserController extends Controller
         $this->getView()->render('user/login');
     }
 
+    public function loginPOST()
+    {
+        $this->getView()->ajax();
+
+        $result = ['POST' => $_POST];
+
+        echo json_encode($result);
+    }
+
     public function signin()
     {
         $this->getView()->render('user/signin');

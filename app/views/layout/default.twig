@@ -6,22 +6,17 @@
 
     {{ helpers.assets.css('bootstrap.min') }}
     {{ helpers.assets.css('style') }}
-
     {% block css %}
-    {% endblock %}
-
-    {{ helpers.assets.js('jquery-2.1.3.min') }}
-
-    {% block js_head %}
     {% endblock %}
 
 </head>
 <body>
-
 {% block content %}
 {% endblock %}
 
-{% block js_body %}
+{{ helpers.assets.js('jquery-2.1.3.min') }}
+{{ helpers.assets.js('app') }}
+{% block js %}
 {% endblock %}
 
 </body>

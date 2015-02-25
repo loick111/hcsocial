@@ -49,4 +49,11 @@ class View extends \Twig_Environment
     {
         header('Location: ' . $to);
     }
+
+    public function ajax()
+    {
+        header('Cache-Control : no-cache, must-revalidate');
+        header('Expires: 26 Jul 1997 05:00:00 GMT');
+        header('Content-type: application/json');
+    }
 }
