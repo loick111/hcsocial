@@ -36,6 +36,10 @@ class UsersController extends Controller
         $this->getView()->render('users/login');
     }
 
+    public function logout() {
+
+    }
+
     public function signin()
     {
         if (Authentication::getInstance()->isAuthenticated())
