@@ -21,9 +21,8 @@ class UsersController extends Controller
 
     public function show()
     {
-        if (!Authentication::getInstance()->isAuthenticated()) {
-            $this->getView()->redirect('/');
-        }
+        //if (!Authentication::getInstance()->isAuthenticated())
+        //    $this->getView()->redirect('/users/login');
 
         $vars = ['username' => Input::get(1)];
 
