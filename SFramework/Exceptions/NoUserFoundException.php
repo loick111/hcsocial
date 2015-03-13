@@ -14,7 +14,7 @@ class NoUserFoundException extends SException
 {
     public function __construct($name, $code = 0, Exception $previous = null)
     {
-        $message = 'There is no user called "' . $name . '".';
+        $message = 'There is no users called "' . $name . '".';
 
         parent::__construct($message, $code, $previous);
     }

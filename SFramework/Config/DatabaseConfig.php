@@ -59,7 +59,7 @@ class DatabaseConfig
         $configFile = new ConfigFileParser($fileName);
 
         return new self($configFile->getEntry("host"),
-            $configFile->getEntry("user"),
+            $configFile->getEntry("users"),
             $configFile->getEntry("password"),
             $configFile->getEntry("database"),
             $configFile->getEntry("port"));
@@ -80,8 +80,8 @@ class DatabaseConfig
     }
 
     /**
-     * get user
-     * @return string user name for mysql connection
+     * get users
+     * @return string users name for mysql connection
      */
     public function getUser()
     {
@@ -90,7 +90,7 @@ class DatabaseConfig
 
     /**
      * get password
-     * @return string password for mysql connection for the user returned by getUser()
+     * @return string password for mysql connection for the users returned by getUser()
      */
     public function getPassword()
     {

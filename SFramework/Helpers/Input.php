@@ -105,7 +105,7 @@ class Input
     }
 
     /**
-     * get user ip
+     * get users ip
      * @return mixed
      */
     public static function userIP()

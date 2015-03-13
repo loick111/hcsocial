@@ -14,12 +14,12 @@ class UserController extends Controller
 
     public function index()
     {
-        $this->getView()->redirect('/user/login');
+        $this->getView()->redirect('/users/login');
     }
 
     public function login()
     {
-        $this->getView()->render('user/login');
+        $this->getView()->render('users/login');
     }
 
     public function loginPOST()
@@ -33,6 +33,6 @@ class UserController extends Controller
 
     public function signin()
     {
-        $this->getView()->render('user/signin');
+        $this->getView()->render('users/signin');
     }
 }
