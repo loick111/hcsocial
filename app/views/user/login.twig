@@ -1,16 +1,4 @@
 {% extends 'layout/guest' %}
 
 {% block content %}
-
-    <div class="container">
-        <form action="/user/login" method="post" class="form-signin">
-            <h1>Connexion</h1>
-            <label for="username" class="sr-only">Nom d'utilisateur</label>
-            <input type="text" name="username" class="form-control" placeholder="Nom d'utilisateur" required autofocus>
-            <label for="password" class="sr-only">Mot de passe</label>
-            <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
-            <input type="submit" class="btn btn-block btn-primary" value="Connexion">
-        </form>
-    </div>
-
 {% endblock %}
