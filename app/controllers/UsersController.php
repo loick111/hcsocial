@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use SFramework\mvc\Controller;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
 
     public function __construct()
