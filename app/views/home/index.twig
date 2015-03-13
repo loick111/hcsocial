@@ -8,29 +8,26 @@
                     Exprimez-vous
                 </div>
                 <div class="panel-body">
-                    <textarea name="status" class="form-control share-text" rows="3"
-                              placeholder="Votre message ..."></textarea>
+                    <textarea name="status" class="form-control" rows="3" placeholder="Votre message..."></textarea>
                 </div>
                 <div class="panel-footer">
-                    <button class="btn btn-sm btn-primary">Partager</button>
+                    <button class="btn btn-sm btn-primary">Publier</button>
                 </div>
             </div>
         </div>
-        {% for i in 1 .. 9 %}
+        {% for i in 1 .. 1 %}
         <div class="col-lg-8 col-lg-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="">
-                                <img src="/public/img/profile.png" alt="Loïck Mahieux"
-                                     class="media-object img-circle" width="40">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <a href="/user/loick111">Loïck Mahieux</a>
-                            <span>le 12 mars 2015 à 23:42</span>
-                        </div>
+                    <div class="vcenter">
+                        <a href="">
+                            <img src="/public/img/profile.png" alt="Loïck Mahieux"
+                                 class="media-object img-circle" width="40">
+                        </a>
+                    </div>
+                    <div class="vcenter">
+                        <a href="/user/loick111">Loïck Mahieux</a>
+                        <span>le 12 mars 2015 à 23:42</span>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -42,12 +39,11 @@
                     </p>
                 </div>
                 <div class="panel-footer">
-                    <a class="comments-like"><span class="glyphicon glyphicon-thumbs-up"></span> 3 J'aime</a>
                     <a class="comments-display"><span class="glyphicon glyphicon-comment"></span> Afficher les
                         commentaires</a>
                 </div>
                 <div class="panel-body comments">
-                    {% for i in 1 .. 3 %}
+                    {% for i in 1 .. 1 %}
                     <div class="media">
                         <div class="media-left">
                             <a href="/user/loick111">
@@ -59,13 +55,17 @@
                             <a href="/user/loick111" class="comment-author pull-left">Loïck Mahieux</a>
                             <span class="comment-date">, le 12/03/2015 à 23:54</span>
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis perspiciatis
-                                praesentium quaerat repudiandae soluta? Cum doloribus esse et eum facilis impedit
-                                officiis omnis optio, placeat, quia quo reprehenderit sunt velit? Asperiores cumque
-                                deserunt eveniet hic reprehenderit sit, ut voluptatum?</p>
+                            <p>
+                                Maecenas eget lacus enim. Proin at nisl interdum, tincidunt quam a, viverra libero.
+                                Donec imperdiet condimentum nisl, et dapibus diam finibus in. Aliquam mollis interdum
+                                arcu id egestas.
+                            </p>
                         </div>
                     </div>
                     {% endfor %}
+                </div>
+                <div class="panel-footer">
+                    <input type="text" class="form-control" rows="1" placeholder="Écrire un commentaire..."></textarea>
                 </div>
             </div>
         </div>

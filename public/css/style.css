@@ -1,3 +1,13 @@
+body {
+    margin-top: 60px;
+}
+
 a {
     cursor: pointer;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }
