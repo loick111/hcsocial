@@ -17,6 +17,11 @@ class UsersController extends Controller
         $this->getView()->redirect('/users/login');
     }
 
+    public function show()
+    {
+        $this->getView()->render('users/show');
+    }
+
     public function login()
     {
         $this->getView()->render('users/login');
