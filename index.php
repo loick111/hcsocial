@@ -29,7 +29,7 @@ function main()
     $router = new \SFramework\Routing\Router();
 
     $classRouting = new \SFramework\Routing\ClassRouting('\app\controllers\\');
-    $classRouting->addClass('User');
+    $classRouting->addClass('Users');
 
     $classRouting->generateRoute($router);
 
