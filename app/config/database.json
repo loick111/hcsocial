@@ -1,0 +1,7 @@
+{
+  "host": "localhost",
+  "user": "root",
+  "password": "",
+  "database": "hcsocial",
+  "port": "3306"
+}
