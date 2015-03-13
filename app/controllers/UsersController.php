@@ -24,7 +24,7 @@ class UsersController extends Controller
         //if (!Authentication::getInstance()->isAuthenticated())
         //    $this->getView()->redirect('/users/login');
 
-        $vars = ['username' => $this->getParams(1)];
+        $vars = ['username' => $this->getParams()[1]];
 
         $this->getView()->render('users/show', $vars);
     }
