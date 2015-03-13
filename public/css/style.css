@@ -11,3 +11,12 @@ a {
     vertical-align: middle;
     float: none;
 }
+
+textarea {
+    max-width: 100%;
+    max-height: 200px;
+}
+
+.date {
+    color: #888888;
+}
