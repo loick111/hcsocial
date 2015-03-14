@@ -24,3 +24,20 @@ textarea {
 #guest {
     margin-top: 30px;
 }
+
+img.profile {
+    width: 40px;
+    margin-right: 5px;
+}
+
+.glyphicon {
+    margin-right: 5px;
+}
+
+#loading-news img {
+    width: 100px;
+}
+
+#loading-news h1 {
+    text-align: center;
+}

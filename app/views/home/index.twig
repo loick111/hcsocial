@@ -1,7 +1,7 @@
 {% extends 'layout/connected' %}
 
 {% block content %}
-    <div class="container-fluid">
+    <div class="container-fluid" id="news">
         <div class="col-lg-6 col-lg-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -15,60 +15,30 @@
                 </div>
             </div>
         </div>
-        {% for i in 1 .. 3 %}
-        <div class="col-lg-8 col-lg-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="vcenter">
-                        <a href="/users/show/loick111">
-                            <img src="/public/img/users/loick111.png" alt="Loïck Mahieux"
-                                 class="media-object img-circle" width="40">
-                        </a>
-                    </div>
-                    <div class="vcenter">
-                        <a href="/users/show/loick111">Loïck Mahieux</a>
-                        <span class="date">, le 12 mars 2015 à 23:42</span>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis perspiciatis
-                        praesentium quaerat repudiandae soluta? Cum doloribus esse et eum facilis impedit officiis
-                        omnis optio, placeat, quia quo reprehenderit sunt velit? Asperiores cumque deserunt eveniet
-                        hic reprehenderit sit, ut voluptatum?
-                    </p>
-                </div>
-                <div class="panel-footer">
-                    <a class="comments-display"><span class="glyphicon glyphicon-comment"></span> Afficher les
-                        commentaires</a>
-                </div>
-                <div class="panel-body comments">
-                    {% for i in 1 .. 2 %}
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="/users/show/loick111">
-                                <img src="/public/img/users/loick111.png" alt="Loïck Mahieux" class="img-circle"
-                                     width="40">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <a href="/users/show/loick111" class="comment-author pull-left">Loïck Mahieux</a>
-                            <span class="date">, le 12/03/2015 à 23:54</span>
 
-                            <p>
-                                Maecenas eget lacus enim. Proin at nisl interdum, tincidunt quam a, viverra libero.
-                                Donec imperdiet condimentum nisl, et dapibus diam finibus in. Aliquam mollis interdum
-                                arcu id egestas.
-                            </p>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="panel-footer">
-                    <input type="text" class="form-control" rows="1" placeholder="Écrire un commentaire..."></textarea>
-                </div>
-            </div>
+        <div class="col-lg-6 col-lg-offset-3" id="loading-news">
+            <img src="/public/img/loading.gif" alt="Chargement..." class="center-block">
+            <h1>Chargement...</h1>
         </div>
-        {% endfor %}
     </div>
+{% endblock %}
+{% block comments %}
+<div class="media">
+    <div class="media-left">
+        <a href="/users/show/loick111">
+            <img src="/public/img/users/loick111.png" alt="Loïck Mahieux" class="img-circle"
+                 width="40">
+        </a>
+    </div>
+    <div class="media-body">
+        <a href="/users/show/loick111" class="comment-author pull-left">Loïck Mahieux</a>
+        <span class="date">, le 12/03/2015 à 23:54</span>
+
+        <p>
+            Maecenas eget lacus enim. Proin at nisl interdum, tincidunt quam a, viverra libero.
+            Donec imperdiet condimentum nisl, et dapibus diam finibus in. Aliquam mollis interdum
+            arcu id egestas.
+        </p>
+    </div>
+</div>
 {% endblock %}

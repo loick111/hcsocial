@@ -21,8 +21,8 @@ class UsersController extends Controller
 
     public function show()
     {
-        //if (!Authentication::getInstance()->isAuthenticated())
-        //    $this->getView()->redirect('/users/login');
+        if (!Authentication::getInstance()->isAuthenticated())
+            $this->getView()->redirect('/users/login');
 
         $vars = ['username' => $this->getParams()[0]];
 
@@ -36,8 +36,14 @@ class UsersController extends Controller
         $this->getView()->render('users/login');
     }
 
-    public function logout() {
+    public function logged() {
+        Authentication::getInstance()->setAuthenticated('loick111', 1);
+        $this->getView()->redirect('/');
+    }
 
+    public function logout() {
+        session_destroy();
+        $this->getView()->redirect('/users/login');
     }
 
     public function signin()
