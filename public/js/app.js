@@ -137,7 +137,7 @@ function commentsAddToggle() {
                         .attr('class', 'form-control')
                         .attr('placeholder', 'Écrire un commentaire...')
                 )
-            )
+            );
 
         $(this).remove();
     });
