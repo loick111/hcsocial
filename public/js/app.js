@@ -1,14 +1,21 @@
 $(document).ready(function() {
     addNews('loick111', 'Loïck Mahieux', '03/08/2015', '08:32', 'Contenu du message');
-    addNews('loick111', 'Miléna Marchois', '05/04/2015', '10:26', "Je t'aime ! :D <3");
-    commentsToggle();
+    //addNews('loick111', 'Miléna Marchois', '05/04/2015', '10:26', "Je t'aime ! :D <3");
 
     $('#connect').click(function() {
         window.location.replace("/users/logged")
     });
+
+    start();
 });
 
-function commentsToggle() {
+function start() {
+
+    commentsDisplayToggle();
+    commentsAddToggle();
+}
+
+function commentsDisplayToggle() {
     $(".comments").hide();
     $(".comments-display").click(function() {
         $(this).parent().parent().find(".comments").slideToggle("fast", function () {
@@ -91,6 +98,18 @@ function addNews(username, fullname, date, time, message) {
                                                 .html('Afficher les commentaires')
                                         )
                                 )
+                                .append(
+                                    $('<a>')
+                                        .attr('class', 'comments-action')
+                                        .append(
+                                        $('<span>')
+                                            .attr('class', 'glyphicon glyphicon-pencil')
+                                    )
+                                        .append(
+                                        $('<span>')
+                                            .html('Commenter')
+                                    )
+                                )
                         )
                         .append(
                             $('<div>')
@@ -100,17 +119,26 @@ function addNews(username, fullname, date, time, message) {
                                         .html('Pas de commentaires')
                                 )
                         )
-                        .append(
-                            $('<div>')
-                                .attr('class', 'panel-footer')
-                                .append(
-                                    $('<input>')
-                                        .attr('type', 'text')
-                                        .attr('class', 'form-control')
-                                        .attr('placeholder', 'Écrire un commentaire...')
-                                )
-
-                        )
                 )
         )
+}
+
+function commentsAddToggle() {
+    $('.comments-action').click(function() {
+        $(this)
+            .parent()
+            .parent()
+            .append(
+            $('<div>')
+                .attr('class', 'panel-footer')
+                .append(
+                    $('<input>')
+                        .attr('type', 'text')
+                        .attr('class', 'form-control')
+                        .attr('placeholder', 'Écrire un commentaire...')
+                )
+            )
+
+        $(this).remove();
+    });
 }
