@@ -11,20 +11,25 @@ namespace app\controllers;
 
 use SFramework\mvc\Controller;
 
-class NewsController extends Controller {
-    public function add() {
+class NewsController extends Controller
+{
+    public function add()
+    {
 
     }
 
-    public function load() {
+    public function load()
+    {
 
     }
 
-    public function addComments() {
+    public function addComments()
+    {
 
     }
 
-    public function loadComments() {
+    public function loadComments()
+    {
 
     }
 }

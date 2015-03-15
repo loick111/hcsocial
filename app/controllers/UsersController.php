@@ -21,8 +21,9 @@ class UsersController extends Controller
 
     public function show()
     {
-        if (!Authentication::getInstance()->isAuthenticated())
+        if (!Authentication::getInstance()->isAuthenticated()) {
             $this->getView()->redirect('/users/login');
+        }
 
         $vars = [
             'user' => [
@@ -39,23 +40,28 @@ class UsersController extends Controller
 
     public function login()
     {
-        if (Authentication::getInstance()->isAuthenticated())
+        if (Authentication::getInstance()->isAuthenticated()) {
             $this->getView()->redirect('/');
+        }
         $this->getView()->render('users/login');
     }
 
-    public function logged() {}
-    public function loggedPOST() {
+    public function logged()
+    {
+    }
+
+    public function loggedPOST()
+    {
         $this->getView()->ajax();
 
-        if(Input::post('username') == 'loick111' && Input::post('password') == 'azerty') {
+        if (Input::post('username') == 'loick111' && Input::post('password') == 'azerty') {
             Authentication::getInstance()->setAuthenticated('loick111', 1);
             $res = [
                 'success' => true,
                 'display' => true,
                 'message' => 'Vous êtes maintenant connecté.'
             ];
-        }else {
+        } else {
             $res = [
                 'success' => false,
                 'display' => true,
@@ -66,15 +72,17 @@ class UsersController extends Controller
         echo json_encode($res);
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_destroy();
         $this->getView()->redirect('/users/login');
     }
 
     public function signin()
     {
-        if (Authentication::getInstance()->isAuthenticated())
+        if (Authentication::getInstance()->isAuthenticated()) {
             $this->getView()->redirect('/');
+        }
         $this->getView()->render('users/signin');
     }
 }

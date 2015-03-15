@@ -15,8 +15,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        if (!Authentication::getInstance()->isAuthenticated())
+        if (!Authentication::getInstance()->isAuthenticated()) {
             $this->getView()->redirect('/users/login');
+        }
         $this->getView()->render('/home/index');
     }
 }
