@@ -1,8 +1,11 @@
 $(document).ready(function() {
-
-    addNews('loick111', 'Loïck Mahieux', '03/08/2015', '08:32', 'MESSAGE YOLO');
-    addNews('loick111', 'Miléna Marchois', '05/04/2015', '10:26', 'Coucou ! <3');
+    addNews('loick111', 'Loïck Mahieux', '03/08/2015', '08:32', 'Contenu du message');
+    addNews('loick111', 'Miléna Marchois', '05/04/2015', '10:26', "Je t'aime ! :D <3");
     commentsToggle();
+
+    $('#connect').click(function() {
+        window.location.replace("/users/logged")
+    });
 });
 
 function commentsToggle() {
@@ -27,7 +30,7 @@ function addNews(username, fullname, date, time, message) {
     $('#loading-news').remove();
 
     $('#news')
-        .append(
+        .prepend(
             $('<div>')
                 .attr('class', 'col-lg-8 col-lg-offset-2')
                 .append(
