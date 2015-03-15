@@ -24,7 +24,15 @@ class UsersController extends Controller
         if (!Authentication::getInstance()->isAuthenticated())
             $this->getView()->redirect('/users/login');
 
-        $vars = ['username' => $this->getParams()[0]];
+        $vars = [
+            'user' => [
+                'username' => 'loick111',
+                'mail' => 'loick111@gmail.com',
+                'hash' => md5('loick111@gmail.com'),
+                'firstname' => 'Loïck',
+                'lastname' => 'Mahieux'
+            ]
+        ];
 
         $this->getView()->render('users/show', $vars);
     }
@@ -36,9 +44,26 @@ class UsersController extends Controller
         $this->getView()->render('users/login');
     }
 
-    public function logged() {
-        Authentication::getInstance()->setAuthenticated('loick111', 1);
-        $this->getView()->redirect('/');
+    public function logged() {}
+    public function loggedPOST() {
+        $this->getView()->ajax();
+
+        if(Input::post('username') == 'loick111' && Input::post('password') == 'azerty') {
+            Authentication::getInstance()->setAuthenticated('loick111', 1);
+            $res = [
+                'success' => true,
+                'display' => true,
+                'message' => 'Vous êtes maintenant connecté.'
+            ];
+        }else {
+            $res = [
+                'success' => false,
+                'display' => true,
+                'message' => 'La combinaison Nom d\'utilisateur/Mot de passe ne correspond pas.'
+            ];
+        }
+
+        echo json_encode($res);
     }
 
     public function logout() {

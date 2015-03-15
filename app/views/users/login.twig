@@ -13,35 +13,38 @@
                                 <div class="row">
                                     <div class="center-block">
                                         <img class="img-circle center-block"
-                                             src="/public/img/users/guest.png"
-                                             alt="">
+                                             src="http://gravatar.com/avatar/0?s=150"
+                                             alt=""
+                                             id="img-profile">
                                         <br/>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-10 col-md-offset-1 ">
-                                        <div class="form-group">
-                                            <div class="input-group">
-												<span class="input-group-addon">
-													<i class="glyphicon glyphicon-user"></i>
-												</span>
-                                                <input class="form-control" placeholder="Nom d'utilisateur"
-                                                       name="username"
-                                                       type="text" autofocus>
+                                        <form method="post" action="/users/logged">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-user"></i>
+                                                    </span>
+                                                    <input class="form-control" placeholder="Nom d'utilisateur"
+                                                           name="username"
+                                                           type="text" autofocus required>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-												<span class="input-group-addon">
-													<i class="glyphicon glyphicon-lock"></i>
-												</span>
-                                                <input class="form-control" placeholder="Mot de passe" name="password"
-                                                       type="password">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-lock"></i>
+                                                    </span>
+                                                    <input class="form-control" placeholder="Mot de passe" name="password"
+                                                           type="password" required>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-lg btn-primary btn-block" id="connect">Connexion</button>
-                                        </div>
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Connexion">
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </fieldset>
