@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\usersModel;
 use SFramework\Helpers\Authentication;
 use SFramework\Helpers\Input;
 use SFramework\mvc\Controller;
@@ -46,11 +47,7 @@ class UsersController extends Controller
         $this->getView()->render('users/login');
     }
 
-    public function logged()
-    {
-    }
-
-    public function loggedPOST()
+    public function loginPOST()
     {
         $this->getView()->ajax();
 
@@ -84,5 +81,52 @@ class UsersController extends Controller
             $this->getView()->redirect('/');
         }
         $this->getView()->render('users/signin');
+    }
+
+    //AJAX
+    public function checkUser()
+    {
+    }
+
+    public function checkUserGET()
+    {
+        $this->getView()->ajax();
+        $username = Input::get('username');
+
+        $model = new usersModel();
+
+        $res = [
+            'username' => $username,
+            'available' => false
+        ];
+
+        if ($model->getByUsername($username)) {
+            $res['available'] = false;
+        }
+
+        echo json_encode($res);
+    }
+
+    public function checkMail()
+    {
+    }
+
+    public function checkMailGET()
+    {
+        $this->getView()->ajax();
+        $mail = Input::get('mail');
+
+        $model = new usersModel();
+
+        $res = [
+            'mail' => $mail,
+            'available' => false
+        ];
+
+        if ($model->getByMail($mail)) {
+            $res['available'] = false;
+        }
+
+        echo json_encode($res);
     }
 }

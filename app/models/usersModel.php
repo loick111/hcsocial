@@ -41,7 +41,7 @@ SQL;
         DatabaseProvider::connection()->execute($sql, $user);
     }
 
-    public function remove($user)
+    public function delete($user)
     {
         $sql = <<<SQL
 DELETE FROM users
@@ -50,13 +50,31 @@ SQL;
         DatabaseProvider::connection()->execute($sql, $user);
     }
 
-    public function get($username)
+    public function get($id)
+    {
+        $sql = <<<SQL
+SELECT * FROM users
+  WHERE id = :id;
+SQL;
+        DatabaseProvider::connection()->selectFirst($sql, ['id' => $id]);
+    }
+
+    public function getByUsername($username)
     {
         $sql = <<<SQL
 SELECT * FROM users
   WHERE username = :username;
 SQL;
-        DatabaseProvider::connection()->query($sql, ['username' => $username]);
+        DatabaseProvider::connection()->selectFirst($sql, ['username' => $username]);
+    }
+
+    public function getByMail($mail)
+    {
+        $sql = <<<SQL
+SELECT * FROM users
+  WHERE mail = :mail;
+SQL;
+        DatabaseProvider::connection()->selectFirst($sql, ['mail' => $mail]);
     }
 
     public function check($username, $password)
@@ -66,7 +84,7 @@ SELECT * FROM users
   WHERE username = :username
   AND password = SHA1(CONCAT(:password, :salt));
 SQL;
-        DatabaseProvider::connection()->query($sql, [
+        DatabaseProvider::connection()->selectFirst($sql, [
             'username' => $username,
             'password' => $password,
             'salt' => self::SALT

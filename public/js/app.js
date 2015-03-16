@@ -13,6 +13,21 @@ function start() {
     changeImgProfile();
     commentsDisplayToggle();
     commentsAddToggle();
+
+    //FORMS
+    formAjax('#form-login', function(data) {
+        //on success
+        console.log(data);
+        if (data.display)
+            alert(data.message);
+        if (data.success)
+            window.location = '/';
+    }, function(data) {
+        //on error
+        if (data.display)
+            alert(data.message);
+    });
+
 }
 
 function commentsDisplayToggle() {
@@ -164,19 +179,16 @@ function changeImgProfile() {
     });
 }
 
-$('form').submit(function () {
-    var data = $(this).serialize();
-    $.ajax({
-        type: $(this).attr("method"),
-        url: $(this).attr("action"),
-        data: data,
-
-        success: function (data) {
-            if (data.display)
-                alert(data.message);
-            if (data.success)
-                window.location = '/';
-        }
+function formAjax(form, success, error) {
+    $(form).submit(function () {
+        var data = $(this).serialize();
+        $.ajax({
+            type: $(this).attr("method"),
+            url: $(this).attr("action"),
+            data: data,
+            success: success,
+            error: error
+        });
+        return false;
     });
-    return false;
-});
+}

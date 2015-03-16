@@ -30,6 +30,7 @@ function main()
 
     $classRouting = new \SFramework\Routing\ClassRouting('\app\controllers\\');
     $classRouting->addClass('Users');
+    $classRouting->addClass('News');
 
     $classRouting->generateRoute($router);
 

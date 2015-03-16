@@ -9,27 +9,46 @@
 namespace app\controllers;
 
 
+use app\models\newsModel;
+use SFramework\Helpers\Authentication;
+use SFramework\Helpers\Input;
 use SFramework\mvc\Controller;
 
 class NewsController extends Controller
 {
-    public function add()
+    public function add() {}
+    public function addPOST()
     {
+        $this->getView()->ajax();
+        $username = Authentication::getInstance()->getUserName();
+        $message = Input::post('message');
 
+        $model = new newsModel();
+
+        $res = [
+            'username' => $username,
+            'message' => $message,
+            'success' => false
+        ];
+
+        if ($model->add([
+            'user' => $username,
+            'message' => $message
+        ])
+        ) {
+            $res['success'] = true;
+        }
+
+        echo json_encode($res);
     }
 
-    public function load()
+    public function loadAll() {}
+    public function loadAllGET()
     {
+        $this->getView()->ajax();
+        $model = new newsModel();
+        $news = $model->getAll();
 
-    }
-
-    public function addComments()
-    {
-
-    }
-
-    public function loadComments()
-    {
-
+        echo json_encode($news);
     }
 }
