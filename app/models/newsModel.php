@@ -17,10 +17,13 @@ class newsModel extends Model
     public function getAll()
     {
         $sql = <<<SQL
-SELECT * FROM news
-  ORDER BY date DESC;
+(SELECT * FROM news
+  JOIN users ON news.username = users.username
+  ORDER BY date DESC
+  LIMIT 100)
+  ORDER BY date ASC;
 SQL;
-        DatabaseProvider::connection()->query($sql);
+        return DatabaseProvider::connection()->query($sql);
     }
 
     public function get($id)
@@ -28,18 +31,18 @@ SQL;
         $sql = <<<SQL
 SELECT * FROM news
   WHERE id = :id
-  ORDER BY date DESC;
+  ORDER BY date ASC;
 SQL;
-        DatabaseProvider::connection()->selectFirst($sql, ['id' => $id]);
+        return DatabaseProvider::connection()->selectFirst($sql, ['id' => $id]);
     }
 
     public function add($news)
     {
         $sql = <<<SQL
-INSERT INTO news (user, date, message)
+INSERT INTO news (username, date, message)
   VALUES (:user, NOW(), :message);
 SQL;
-        DatabaseProvider::connection()->execute($sql, $news);
+        return DatabaseProvider::connection()->execute($sql, $news);
     }
 
     public function delete($id)
@@ -48,6 +51,6 @@ SQL;
 DELETE FROM news
   WHERE id = :id;
 SQL;
-        DatabaseProvider::connection()->execute($sql, ['id' => $id]);
+        return DatabaseProvider::connection()->execute($sql, ['id' => $id]);
     }
 }

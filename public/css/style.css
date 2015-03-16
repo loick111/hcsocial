@@ -107,6 +107,13 @@ img.profile {
     color: #ffffff;
 }
 
+.navbar-default img {
+    position: relative;
+    top: -5px;
+    float: left;
+    left: -5px;
+}
+
 @media (max-width: 767px) {
     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
         color: #ecf0f1;

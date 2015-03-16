@@ -42,8 +42,7 @@ class NewsController extends Controller
         echo json_encode($res);
     }
 
-    public function loadAll() {}
-    public function loadAllGET()
+    public function loadAll()
     {
         $this->getView()->ajax();
         $model = new newsModel();

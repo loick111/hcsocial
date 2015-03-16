@@ -24,7 +24,7 @@ INSERT INTO users (username, mail, password, firstname, lastname)
 SQL;
 
         $user['salt'] = self::SALT;
-        DatabaseProvider::connection()->execute($sql, $user);
+        return DatabaseProvider::connection()->execute($sql, $user);
     }
 
     public function update($user)
@@ -38,7 +38,7 @@ UPDATE users (password, firstname, lastname)
 SQL;
 
         $user['salt'] = self::SALT;
-        DatabaseProvider::connection()->execute($sql, $user);
+        return DatabaseProvider::connection()->execute($sql, $user);
     }
 
     public function delete($user)
@@ -47,7 +47,7 @@ SQL;
 DELETE FROM users
   WHERE username = user.username;
 SQL;
-        DatabaseProvider::connection()->execute($sql, $user);
+        return DatabaseProvider::connection()->execute($sql, $user);
     }
 
     public function get($id)
@@ -56,7 +56,7 @@ SQL;
 SELECT * FROM users
   WHERE id = :id;
 SQL;
-        DatabaseProvider::connection()->selectFirst($sql, ['id' => $id]);
+        return DatabaseProvider::connection()->selectFirst($sql, ['id' => $id]);
     }
 
     public function getByUsername($username)
@@ -65,7 +65,7 @@ SQL;
 SELECT * FROM users
   WHERE username = :username;
 SQL;
-        DatabaseProvider::connection()->selectFirst($sql, ['username' => $username]);
+        return DatabaseProvider::connection()->selectFirst($sql, ['username' => $username]);
     }
 
     public function getByMail($mail)
@@ -74,7 +74,7 @@ SQL;
 SELECT * FROM users
   WHERE mail = :mail;
 SQL;
-        DatabaseProvider::connection()->selectFirst($sql, ['mail' => $mail]);
+        return DatabaseProvider::connection()->selectFirst($sql, ['mail' => $mail]);
     }
 
     public function check($username, $password)
@@ -84,7 +84,7 @@ SELECT * FROM users
   WHERE username = :username
   AND password = SHA1(CONCAT(:password, :salt));
 SQL;
-        DatabaseProvider::connection()->selectFirst($sql, [
+        return DatabaseProvider::connection()->selectFirst($sql, [
             'username' => $username,
             'password' => $password,
             'salt' => self::SALT

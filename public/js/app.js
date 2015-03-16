@@ -1,23 +1,18 @@
 $(document).ready(function () {
-    createNews('loick111', 'loick111@gmail.com', 'Loïck Mahieux', '03/08/2015', '08:32', 'Pellentesque vel bibendum mauris. Fusce volutpat dolor ut purus aliquet tristique. Aliquam rhoncus turpis sed eros euismod, vitae pretium sem interdum. Duis leo ligula, eleifend in risus ut, tempus congue sapien. Phasellus tincidunt varius odio a fermentum. Sed vel odio suscipit, ultricies diam at, egestas ex. Ut ut libero nec risus rhoncus lacinia. Quisque quis leo accumsan, tristique ipsum et, feugiat est. Etiam quam neque, tincidunt in odio a, rhoncus condimentum mi.');
-
-    $('#connect').click(function () {
-        window.location.replace("/users/logged")
-    });
-
     start();
 });
 
 function start() {
+    loadNews();
     checkRequired();
     changeImgProfile();
     commentsDisplayToggle();
     commentsAddToggle();
+    loadGravatar();
 
     //FORMS
     formAjax('#form-login', function(data) {
         //on success
-        console.log(data);
         if (data.display)
             alert(data.message);
         if (data.success)
@@ -28,6 +23,21 @@ function start() {
             alert(data.message);
     });
 
+    formAjax('#form-signin', function(data) {
+        //on success
+        alert(data);
+    }, function(data) {
+        //on error
+        alert(data);
+    });
+
+    formAjax('#form-add-news', function(data) {
+        //on success
+        lol();
+    }, function(data) {
+        //on error
+
+    });
 }
 
 function commentsDisplayToggle() {
@@ -46,6 +56,23 @@ function commentsDisplayToggle() {
         });
 
     })
+}
+
+function loadNews() {
+    $.ajax({
+        url: '/news/loadAll',
+        success: function(data) {
+            for(news in data) {
+                createNews(data[news].username, data[news].mail, data[news].firstname + ' ' + data[news].lastname, data[news].date, '', data[news].message);
+            }
+
+            commentsDisplayToggle();
+            commentsAddToggle();
+        },
+        error: function(data) {
+            alert('Erreur');
+        }
+    });
 }
 
 function createNews(username, mail, fullname, date, time, message) {
@@ -153,7 +180,6 @@ function commentsAddToggle() {
                     .attr('placeholder', 'Écrire un commentaire...')
             )
         );
-
         $(this).remove();
     });
 }
@@ -174,8 +200,13 @@ function checkRequired() {
 function changeImgProfile() {
     $('input[name="mail"]').change(function () {
         var hash = CryptoJS.MD5($('input[name="mail"]').val());
-
         $('#img-profile').attr('src', 'http://gravatar.com/avatar/' + hash + '?s=150');
+    });
+}
+
+function loadGravatar() {
+    $('.gravatar').each(function() {
+        $(this).attr('src', 'http://gravatar.com/avatar/' + CryptoJS.MD5($(this).attr('src')) + '?s=150');
     });
 }
 

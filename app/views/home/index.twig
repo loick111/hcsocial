@@ -7,12 +7,14 @@
                 <div class="panel-heading">
                     Exprimez-vous
                 </div>
-                <div class="panel-body">
-                    <textarea name="status" class="form-control" rows="3" placeholder="Votre message..."></textarea>
-                </div>
-                <div class="panel-footer">
-                    <button class="btn btn-sm btn-primary">Publier</button>
-                </div>
+                <form method="post" action="/news/add" id="form-add-news">
+                    <div class="panel-body">
+                        <textarea name="message" class="form-control" rows="3" placeholder="Votre message..."></textarea>
+                    </div>
+                    <div class="panel-footer">
+                        <input type="submit" class="btn btn-sm btn-primary" value="Publier">
+                    </div>
+                </form>
             </div>
         </div>
 

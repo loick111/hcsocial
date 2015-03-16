@@ -26,14 +26,11 @@ class UsersController extends Controller
             $this->getView()->redirect('/users/login');
         }
 
+        $username = $this->getParams()[0];
+        $model = new usersModel();
+
         $vars = [
-            'user' => [
-                'username' => 'loick111',
-                'mail' => 'loick111@gmail.com',
-                'hash' => md5('loick111@gmail.com'),
-                'firstname' => 'Loïck',
-                'lastname' => 'Mahieux'
-            ]
+            'user' => $model->getByUsername($username)
         ];
 
         $this->getView()->render('users/show', $vars);
@@ -50,12 +47,20 @@ class UsersController extends Controller
     public function loginPOST()
     {
         $this->getView()->ajax();
+        $username = Input::post('username');
+        $password = Input::post('password');
 
-        if (Input::post('username') == 'loick111' && Input::post('password') == 'azerty') {
-            Authentication::getInstance()->setAuthenticated('loick111', 1);
+        $model = new usersModel();
+
+        if ($user = $model->check($username, $password)) {
+            Authentication::getInstance()->setAuthenticated($username, [
+                'firstname' => $user['firstname'],
+                'lastname' => $user['lastname'],
+                'mail' => $user['mail']
+            ]);
             $res = [
                 'success' => true,
-                'display' => true,
+                'display' => false,
                 'message' => 'Vous êtes maintenant connecté.'
             ];
         } else {
@@ -81,6 +86,47 @@ class UsersController extends Controller
             $this->getView()->redirect('/');
         }
         $this->getView()->render('users/signin');
+    }
+
+    public function signinPOST() {
+        $this->getView()->ajax();
+        $username = Input::post('username');
+        $mail = Input::post('mail');
+        $firstname = Input::post('firstname');
+        $lastname = Input::post('lastname');
+        $password = Input::post('password');
+        $password2 = Input::post('password2');
+
+        $res = [
+            'success' => false,
+            'message' => 'Erreur',
+            'username' => $username,
+            'mail' => $mail,
+            'firstname' => $firstname,
+            'lastname' => $lastname
+        ];
+
+        $model = new usersModel();
+
+        if($password != $password2) {
+            $res['message'] = 'Les mots de passe de correspondent pas.';
+        }elseif(!empty($model->getByUsername($username))) {
+            $res['message'] = 'Le nom d\'utilisateur est déjà utilisé.';
+        }elseif(!empty($model->getByMail($mail))) {
+            $res['message'] = 'L\'adresse mail est déjà utilisée.';
+        }else {
+            $model->add([
+                'username' => $username,
+                'mail' => $mail,
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'password' => $password
+            ]);
+            $res['success'] = true;
+            $res['message'] = 'Vous êtes maintenant inscrit !';
+        }
+
+        echo json_encode($res);
     }
 
     //AJAX

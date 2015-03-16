@@ -26,19 +26,17 @@ class Authentication
         return self::$instance;
     }
 
-    public function setAuthenticated($userName, $userId, array $options = [])
+    public function setAuthenticated($userName, array $options = [])
     {
-        $_SESSION['userName'] = $userName;
-        $_SESSION['userId'] = $userId;
-        $_SESSION['authDate'] = new \DateTime();
+        $_SESSION['username'] = $userName;
+        $_SESSION['authdate'] = new \DateTime();
         $_SESSION['options'] = $options;
     }
 
     public function disconnect()
     {
-        unset($_SESSION['userName']);
-        unset($_SESSION['userId']);
-        unset($_SESSION['authDate']);
+        unset($_SESSION['username']);
+        unset($_SESSION['authdate']);
         unset($_SESSION['options']);
         session_destroy();
     }
@@ -52,9 +50,8 @@ class Authentication
         if ($this->isAuthenticated()) {
             $authData = array_merge($authData,
                 [
-                    'userName' => $this->getUserName(),
-                    'userId' => $this->getUserId(),
-                    'authDate' => $this->getAuthDate(),
+                    'username' => $this->getUserName(),
+                    'authdate' => $this->getAuthDate(),
                     'options' => $this->getOptions()
                 ]);
         }
@@ -64,24 +61,18 @@ class Authentication
 
     public function isAuthenticated()
     {
-        return isset($_SESSION['userName']) && !empty($_SESSION['userName'])
-        && isset($_SESSION['userId']) && !empty($_SESSION['userId'])
-        && isset($_SESSION['authDate']) && !empty($_SESSION['authDate']);
+        return isset($_SESSION['username']) && !empty($_SESSION['username'])
+        && isset($_SESSION['authdate']) && !empty($_SESSION['authdate']);
     }
 
     public function getUserName()
     {
-        return $_SESSION['userName'];
-    }
-
-    public function getUserId()
-    {
-        return $_SESSION['userId'];
+        return $_SESSION['username'];
     }
 
     public function getAuthDate()
     {
-        return $_SESSION['authDate'];
+        return $_SESSION['authdate'];
     }
 
     public function getOptions()

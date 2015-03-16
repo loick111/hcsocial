@@ -59,7 +59,7 @@ class DatabaseConfig
         $configFile = new ConfigFileParser($fileName);
 
         return new self($configFile->getEntry("host"),
-            $configFile->getEntry("users"),
+            $configFile->getEntry("user"),
             $configFile->getEntry("password"),
             $configFile->getEntry("database"),
             $configFile->getEntry("port"));

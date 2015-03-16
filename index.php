@@ -26,6 +26,8 @@ if (DEBUG) {
 
 function main()
 {
+    \SFramework\Database\DatabaseProvider::connect('app/config/database.json');
+
     $router = new \SFramework\Routing\Router();
 
     $classRouting = new \SFramework\Routing\ClassRouting('\app\controllers\\');
