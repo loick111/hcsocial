@@ -99,6 +99,7 @@ class UsersController extends Controller
 
         $res = [
             'success' => false,
+            'display' => true,
             'message' => 'Erreur',
             'username' => $username,
             'mail' => $mail,

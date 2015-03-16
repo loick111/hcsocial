@@ -25,10 +25,12 @@ function start() {
 
     formAjax('#form-signin', function(data) {
         //on success
-        alert(data);
+        alert(data.message);
+        if(data.success)
+            window.location = '/users/login';
     }, function(data) {
         //on error
-        alert(data);
+        alert(data.message);
     });
 
     formAjax('#form-add-news', function(data) {
@@ -163,6 +165,8 @@ function createNews(username, mail, fullname, date, time, message) {
             )
         )
     )
+        .hide()
+        .fadeIn();
 }
 
 function commentsAddToggle() {
