@@ -192,9 +192,9 @@ function createNews(username, mail, fullname, date, time, message) {
                 )
             )
         )
+            .hide()
+            .fadeIn()
     )
-        .hide()
-        .fadeIn();
 }
 
 function commentsAddToggle() {
