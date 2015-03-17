@@ -3,7 +3,6 @@ $(document).ready(function () {
 });
 
 function start() {
-    //activeLiNavbar();
     loadNews();
     checkRequired();
     changeImgProfile();
@@ -38,8 +37,10 @@ function formUtils() {
 
     formAjax('#form-add-news', function(data) {
         //on success
-        console.log(data);
-        createNews(data.username, data.mail, data.fullname, data.date, '', data.message);
+        date = new Date(data.date);
+        createNews(data.username, data.mail, data.fullname, date.toLocaleDateString(), date.toLocaleTimeString(), data.message);
+
+        $('#form-add-news')[0].reset();
 
         commentsDisplayToggle();
         commentsAddToggle();
@@ -52,14 +53,6 @@ function formUtils() {
 function commentsUtils() {
     commentsDisplayToggle();
     commentsAddToggle();
-}
-
-function activeLiNavbar() {
-    $('.navbar-default li').hover(function() {
-        $(this).addClass('active');
-    }, function() {
-        $(this).removeClass('active');
-    });
 }
 
 function commentsDisplayToggle() {
@@ -100,13 +93,14 @@ function loadNews() {
             }
 
             for(news in data) {
-                createNews(data[news].username, data[news].mail, data[news].firstname + ' ' + data[news].lastname, data[news].date, '', data[news].message);
+                date = new Date(data[news].date);
+                createNews(data[news].username, data[news].mail, data[news].firstname + ' ' + data[news].lastname, date.toLocaleDateString(), date.toLocaleTimeString(), data[news].message);
             }
 
             commentsUtils();
         },
         error: function(data) {
-            alert('Erreur');
+            alert('Erreur interne.');
         }
     });
 }

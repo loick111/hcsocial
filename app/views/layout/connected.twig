@@ -15,8 +15,8 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Fil d'actualité</a></li>
-                    <li><a href="#">Messages</a></li>
+                    <li {%  if view and view == 'home' %}class="active"{% endif %}><a href="/"><span class="glyphicon glyphicon-home"></span> Fil d'actualité</a></li>
+                    <li {%  if view and view == 'messages' %}class="active"{% endif %}><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/users/show/{{ auth.username }}"><img width="30" src="{{ auth.options.mail }}" class="img-circle gravatar"> {{ auth.options.firstname }} {{ auth.options.lastname }}</a></li>

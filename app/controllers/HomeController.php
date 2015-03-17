@@ -18,6 +18,6 @@ class HomeController extends Controller
         if (!Authentication::getInstance()->isAuthenticated()) {
             $this->getView()->redirect('/users/login');
         }
-        $this->getView()->render('/home/index');
+        $this->getView()->render('/home/index', ['view' => 'home']);
     }
 }

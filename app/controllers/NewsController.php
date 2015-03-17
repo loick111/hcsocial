@@ -31,7 +31,7 @@ class NewsController extends Controller
             'username' => $username,
             'fullname' => $auth['firstname'] . ' ' . $auth['lastname'],
             'mail' => $auth['mail'],
-            'date' => time(),
+            'date' => date('Y-m-d H:i:s'),
             'message' => $message,
             'success' => false
         ];
