@@ -35,11 +35,11 @@ img.profile {
     margin-right: 5px;
 }
 
-#loading-news img {
+#news-message img {
     width: 100px;
 }
 
-#loading-news h1 {
+#news-message h1 {
     text-align: center;
 }
 
@@ -49,7 +49,7 @@ img.profile {
 
 .navbar-default {
     background-color: #3c7de7;
-    border-color: #65c6fb;
+    border-color: #06A0FF;
 }
 
 .navbar-default .navbar-brand {
@@ -70,24 +70,25 @@ img.profile {
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     color: #ffffff;
+    background: #06A0FF;
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: #ffffff;
-    background-color: #65c6fb;
+    background-color: #06A0FF;
 }
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
     color: #ffffff;
-    background-color: #65c6fb;
+    background-color: #06A0FF;
 }
 
 .navbar-default .navbar-toggle {
-    border-color: #65c6fb;
+    border-color: #06A0FF;
 }
 
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-    background-color: #65c6fb;
+    background-color: #06A0FF;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -125,6 +126,6 @@ img.profile {
 
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
         color: #ffffff;
-        background-color: #65c6fb;
+        background-color: #06A0FF;
     }
 }

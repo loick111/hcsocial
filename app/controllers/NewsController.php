@@ -25,8 +25,13 @@ class NewsController extends Controller
 
         $model = new newsModel();
 
+        $auth = Authentication::getInstance()->getOptions();
+
         $res = [
             'username' => $username,
+            'fullname' => $auth['firstname'] . ' ' . $auth['lastname'],
+            'mail' => $auth['mail'],
+            'date' => time(),
             'message' => $message,
             'success' => false
         ];

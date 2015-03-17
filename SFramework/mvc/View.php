@@ -16,6 +16,7 @@ use Twig_Extension_Debug;
 class View extends \Twig_Environment
 {
     private $helpers;
+    private $context = [];
 
     public function __construct(\Twig_LoaderInterface $loader = null, $options = [])
     {
@@ -27,6 +28,14 @@ class View extends \Twig_Environment
         $this->addExtension(new Twig_Extension_Debug());
 
         $this->helpers = new ViewHelpers();
+
+        $this->addToContext(BaseViewContextProvider::provide());
+        $this->addToContext(['helpers' => $this->helpers]);
+        $this->addToContext(Authentication::getInstance()->addToContext($this->context));
+    }
+
+    public function addToContext(array $context) {
+        $this->context = array_merge($context, $this->context);
     }
 
     public function loadTemplate($name, $index = null)
@@ -38,11 +47,8 @@ class View extends \Twig_Environment
 
     public function render($name, array $context = [])
     {
-        $context = array_merge(BaseViewContextProvider::provide(), $context);
-        $context = array_merge(['helpers' => $this->helpers], $context);
-        $context = Authentication::getInstance()->addToContext($context);
-
-        echo parent::render($name, $context);
+        $this->addToContext($context);
+        echo parent::render($name, $this->context);
     }
 
     public function redirect($to)

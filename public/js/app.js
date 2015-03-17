@@ -3,13 +3,16 @@ $(document).ready(function () {
 });
 
 function start() {
+    //activeLiNavbar();
     loadNews();
     checkRequired();
     changeImgProfile();
-    commentsDisplayToggle();
-    commentsAddToggle();
+    commentsUtils();
     loadGravatar();
+    formUtils();
+}
 
+function formUtils() {
     //FORMS
     formAjax('#form-login', function(data) {
         //on success
@@ -35,10 +38,27 @@ function start() {
 
     formAjax('#form-add-news', function(data) {
         //on success
-        lol();
+        console.log(data);
+        createNews(data.username, data.mail, data.fullname, data.date, '', data.message);
+
+        commentsDisplayToggle();
+        commentsAddToggle();
     }, function(data) {
         //on error
 
+    });
+}
+
+function commentsUtils() {
+    commentsDisplayToggle();
+    commentsAddToggle();
+}
+
+function activeLiNavbar() {
+    $('.navbar-default li').hover(function() {
+        $(this).addClass('active');
+    }, function() {
+        $(this).removeClass('active');
     });
 }
 
@@ -64,12 +84,26 @@ function loadNews() {
     $.ajax({
         url: '/news/loadAll',
         success: function(data) {
+            if(data == 0) {
+                $('#news-message').remove();
+                $('#news')
+                    .append(
+                        $('<div>')
+                            .addClass('col-lg-6 col-lg-offset-3')
+                            .attr('id', 'news-message')
+                            .append(
+                                $('<h1>')
+                                    .addClass('center-block')
+                                    .html('Pas d\'actualités.')
+                            )
+                    );
+            }
+
             for(news in data) {
                 createNews(data[news].username, data[news].mail, data[news].firstname + ' ' + data[news].lastname, data[news].date, '', data[news].message);
             }
 
-            commentsDisplayToggle();
-            commentsAddToggle();
+            commentsUtils();
         },
         error: function(data) {
             alert('Erreur');
@@ -78,7 +112,7 @@ function loadNews() {
 }
 
 function createNews(username, mail, fullname, date, time, message) {
-    $('#loading-news').remove();
+    $('#news-message').remove();
 
     $('#news')
         .prepend(

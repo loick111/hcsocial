@@ -11,6 +11,7 @@ namespace SFramework\mvc;
 use SFramework\Exceptions\InvalidModelClassException;
 use SFramework\Exceptions\MissingParamsException;
 use SFramework\Helpers\ControllerHelpers;
+use SFramework\Routing\Router;
 
 class Controller
 {
@@ -24,6 +25,7 @@ class Controller
         $this->loader = new \Twig_Loader_Filesystem('app/views');
         $this->view = new View($this->loader);
         $this->helpers = new ControllerHelpers();
+
     }
 
     /**
