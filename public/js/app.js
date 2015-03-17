@@ -38,7 +38,7 @@ function formUtils() {
     formAjax('#form-add-news', function(data) {
         //on success
         date = new Date(data.date);
-        createNews(data.username, data.mail, data.fullname, date.toLocaleDateString(), date.toLocaleTimeString(), data.message);
+        createNews(data.id, data.username, data.mail, data.fullname, date.toLocaleDateString(), date.toLocaleTimeString(), data.message);
 
         $('#form-add-news')[0].reset();
 
@@ -94,24 +94,26 @@ function loadNews() {
 
             for(news in data) {
                 date = new Date(data[news].date);
-                createNews(data[news].username, data[news].mail, data[news].firstname + ' ' + data[news].lastname, date.toLocaleDateString(), date.toLocaleTimeString(), data[news].message);
+                createNews(data[news].id, data[news].username, data[news].mail, data[news].firstname + ' ' + data[news].lastname, date.toLocaleDateString(), date.toLocaleTimeString(), data[news].message);
             }
 
             commentsUtils();
         },
         error: function(data) {
-            alert('Erreur interne.');
+            alert('Erreur lors du chargement des news.');
         }
     });
 }
 
-function createNews(username, mail, fullname, date, time, message) {
+function createNews(id, username, mail, fullname, date, time, message) {
     $('#news-message').remove();
 
     $('#news')
+        .attr('data-news-latest', id)
         .prepend(
         $('<div>')
             .attr('class', 'col-lg-6 col-lg-offset-3')
+            .attr('data-news-id', id)
             .append(
             $('<div>')
                 .attr('class', 'panel panel-default')

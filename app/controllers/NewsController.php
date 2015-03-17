@@ -32,11 +32,11 @@ class NewsController extends Controller
             'fullname' => $auth['firstname'] . ' ' . $auth['lastname'],
             'mail' => $auth['mail'],
             'date' => date('Y-m-d H:i:s'),
-            'message' => $message,
+            'message' => nl2br($message),
             'success' => false
         ];
 
-        if ($model->add([
+        if ($res['id'] = $model->add([
             'user' => $username,
             'message' => $message
         ])
@@ -52,6 +52,9 @@ class NewsController extends Controller
         $this->getView()->ajax();
         $model = new newsModel();
         $news = $model->getAll();
+
+        foreach($news as &$n)
+            $n['message'] = nl2br($n['message']);
 
         echo json_encode($news);
     }

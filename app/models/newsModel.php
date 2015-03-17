@@ -20,7 +20,7 @@ class newsModel extends Model
 (SELECT * FROM news
   JOIN users ON news.username = users.username
   ORDER BY date DESC
-  LIMIT 100)
+  LIMIT 5)
   ORDER BY date ASC;
 SQL;
         return DatabaseProvider::connection()->query($sql);
@@ -42,7 +42,8 @@ SQL;
 INSERT INTO news (username, date, message)
   VALUES (:user, NOW(), :message);
 SQL;
-        return DatabaseProvider::connection()->execute($sql, $news);
+        DatabaseProvider::connection()->execute($sql, $news);
+        return DatabaseProvider::connection()->lastInsertId();
     }
 
     public function delete($id)
