@@ -190,13 +190,29 @@ function commentsAddToggle() {
 
 function checkRequired() {
     $('input[required]').focusout(function () {
+        if($(this).parent().find('span').length == 1)
+            $(this).parent()
+                .append(
+                    $('<span>')
+                        .addClass('glyphicon')
+                        .addClass('form-control-feedback')
+                );
+
         if ($(this).val() == '') {
             $(this).parent()
                 .addClass('has-error');
+            $(this).parent()
+                .find('span.form-control-feedback')
+                .removeClass('glyphicon-ok')
+                .addClass('glyphicon-remove');
         } else {
             $(this).parent()
                 .removeClass('has-error')
                 .addClass('has-success');
+            $(this).parent()
+                .find('span.form-control-feedback')
+                .removeClass('glyphicon-remove')
+                .addClass('glyphicon-ok');
         }
     });
 }
