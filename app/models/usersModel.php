@@ -24,6 +24,7 @@ INSERT INTO users (username, mail, password, firstname, lastname)
 SQL;
 
         $user['salt'] = self::SALT;
+
         return DatabaseProvider::connection()->execute($sql, $user);
     }
 
@@ -38,6 +39,7 @@ UPDATE users (password, firstname, lastname)
 SQL;
 
         $user['salt'] = self::SALT;
+
         return DatabaseProvider::connection()->execute($sql, $user);
     }
 
@@ -47,6 +49,7 @@ SQL;
 DELETE FROM users
   WHERE username = user.username;
 SQL;
+
         return DatabaseProvider::connection()->execute($sql, $user);
     }
 
@@ -56,6 +59,7 @@ SQL;
 SELECT * FROM users
   WHERE id = :id;
 SQL;
+
         return DatabaseProvider::connection()->selectFirst($sql, ['id' => $id]);
     }
 
@@ -65,6 +69,7 @@ SQL;
 SELECT * FROM users
   WHERE username = :username;
 SQL;
+
         return DatabaseProvider::connection()->selectFirst($sql, ['username' => $username]);
     }
 
@@ -74,6 +79,7 @@ SQL;
 SELECT * FROM users
   WHERE mail = :mail;
 SQL;
+
         return DatabaseProvider::connection()->selectFirst($sql, ['mail' => $mail]);
     }
 
@@ -84,6 +90,7 @@ SELECT * FROM users
   WHERE username = :username
   AND password = SHA1(CONCAT(:password, :salt));
 SQL;
+
         return DatabaseProvider::connection()->selectFirst($sql, [
             'username' => $username,
             'password' => $password,

@@ -34,7 +34,8 @@ class View extends \Twig_Environment
         $this->addToContext(Authentication::getInstance()->addToContext($this->context));
     }
 
-    public function addToContext(array $context) {
+    public function addToContext(array $context)
+    {
         $this->context = array_merge($context, $this->context);
     }
 

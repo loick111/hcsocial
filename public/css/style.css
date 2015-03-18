@@ -22,6 +22,10 @@ textarea {
     color: #888888;
 }
 
+#loading h1 {
+    text-align: center;
+}
+
 img.profile {
     width: 40px;
     margin-right: 5px;

@@ -88,7 +88,8 @@ class UsersController extends Controller
         $this->getView()->render('users/signin');
     }
 
-    public function signinPOST() {
+    public function signinPOST()
+    {
         $this->getView()->ajax();
         $username = Input::post('username');
         $mail = Input::post('mail');
@@ -109,13 +110,13 @@ class UsersController extends Controller
 
         $model = new usersModel();
 
-        if($password != $password2) {
+        if ($password != $password2) {
             $res['message'] = 'Les mots de passe de correspondent pas.';
-        }elseif(!empty($model->getByUsername($username))) {
+        } elseif (!empty($model->getByUsername($username))) {
             $res['message'] = 'Le nom d\'utilisateur est déjà utilisé.';
-        }elseif(!empty($model->getByMail($mail))) {
+        } elseif (!empty($model->getByMail($mail))) {
             $res['message'] = 'L\'adresse mail est déjà utilisée.';
-        }else {
+        } else {
             $model->add([
                 'username' => $username,
                 'mail' => $mail,

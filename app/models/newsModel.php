@@ -23,6 +23,7 @@ class newsModel extends Model
   LIMIT 100)
   ORDER BY date ASC;
 SQL;
+
         return DatabaseProvider::connection()->query($sql);
     }
 
@@ -33,6 +34,7 @@ SELECT * FROM news
   WHERE id = :id
   ORDER BY date ASC;
 SQL;
+
         return DatabaseProvider::connection()->selectFirst($sql, ['id' => $id]);
     }
 
@@ -43,6 +45,7 @@ INSERT INTO news (username, date, message)
   VALUES (:user, NOW(), :message);
 SQL;
         DatabaseProvider::connection()->execute($sql, $news);
+
         return DatabaseProvider::connection()->lastInsertId();
     }
 
@@ -52,6 +55,7 @@ SQL;
 DELETE FROM news
   WHERE id = :id;
 SQL;
+
         return DatabaseProvider::connection()->execute($sql, ['id' => $id]);
     }
 }

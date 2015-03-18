@@ -11,7 +11,6 @@ namespace SFramework\mvc;
 use SFramework\Exceptions\InvalidModelClassException;
 use SFramework\Exceptions\MissingParamsException;
 use SFramework\Helpers\ControllerHelpers;
-use SFramework\Routing\Router;
 
 class Controller
 {

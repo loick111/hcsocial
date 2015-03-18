@@ -13,41 +13,41 @@ function start() {
 
 function formUtils() {
     //FORMS
-    formAjax('#form-login', function(data) {
+    formAjax('#form-login', function (data) {
         //on success
         if (data.display)
             alert(data.message);
         if (data.success)
             window.location = '/';
-    }, function(data) {
+    }, function (data) {
         //on error
         if (data.display)
             alert(data.message);
     });
 
-    formAjax('#form-signin', function(data) {
+    formAjax('#form-signin', function (data) {
         //on success
         alert(data.message);
-        if(data.success)
+        if (data.success)
             window.location = '/users/login';
-    }, function(data) {
+    }, function (data) {
         //on error
         alert(data.message);
     });
 
-    formAjax('#form-add-news', function(data) {
+    formAjax('#form-add-news', function (data) {
         //on success
-        if(data.display)
+        if (data.display)
             alert(data.message);
 
-        if(data.success) {
+        if (data.success) {
             date = new Date(data.date * 1000);
             createNews(data.id, true, data.username, data.mail, data.fullname, date.toLocaleDateString(), date.toLocaleTimeString(), data.message);
 
             $('#form-add-news')[0].reset();
             newsUtils();
         }
-    }, function(data) {
+    }, function (data) {
         //on error
     });
 }
@@ -77,12 +77,12 @@ function commentsDisplayToggle() {
 }
 
 function deleteNews() {
-    $('.delete-news').click(function() {
-        if(confirm('Êtes-vous sur de vouloir supprimer cette publication ?')) {
+    $('.delete-news').click(function () {
+        if (confirm('Êtes-vous sur de vouloir supprimer cette publication ?')) {
             var news = $(this).parent().parent().parent();
             $.ajax({
                 url: '/news/delete/' + news.attr('data-news-id'),
-                success: function(data) {
+                success: function (data) {
                     if (!data.success && data.display) {
                         alert(data.message);
                     }
@@ -92,7 +92,7 @@ function deleteNews() {
                         news.fadeOut();
                     }
                 },
-                error: function(data) {
+                error: function (data) {
                     alert('Erreur lors de la suppression de la publication.');
                 }
             });
@@ -103,37 +103,37 @@ function deleteNews() {
 function loadNews() {
     $.ajax({
         url: '/news/loadAll',
-        success: function(data) {
-            if(data == 0) {
+        success: function (data) {
+            if (data == 0) {
                 $('#news-message').remove();
                 $('#news')
                     .append(
-                        $('<div>')
-                            .addClass('col-lg-6 col-lg-offset-3')
-                            .attr('id', 'news-message')
-                            .append(
-                                $('<h1>')
-                                    .addClass('center-block')
-                                    .html('Pas d\'actualités.')
-                            )
-                    );
+                    $('<div>')
+                        .addClass('col-lg-6 col-lg-offset-3')
+                        .attr('id', 'news-message')
+                        .append(
+                        $('<h1>')
+                            .addClass('center-block')
+                            .html('Pas d\'actualités.')
+                    )
+                );
             }
 
-            for(news in data) {
+            for (news in data) {
                 date = new Date(data[news].date * 1000);
                 createNews(data[news].id, data[news].admin, data[news].username, data[news].mail, data[news].firstname + ' ' + data[news].lastname, date.toLocaleDateString(), date.toLocaleTimeString(), data[news].message);
             }
 
             newsUtils();
         },
-        error: function(data) {
-            alert('Erreur lors du chargement des publications.');
+        error: function (data) {
+
         }
     });
 }
 
 function createNews(id, admin, username, mail, fullname, date, time, message) {
-    $('#news-message').remove();
+    $('#news-message').hide();
 
     $('#news')
         .attr('data-news-latest', id)
@@ -260,7 +260,7 @@ function createNews(id, admin, username, mail, fullname, date, time, message) {
             .fadeIn()
     );
 
-    if(admin) {
+    if (admin) {
         $('div[data-news-id=' + id + '] .delete-news').fadeIn();
         //$('div[data-news-id=' + id + '] .modify-news').fadeIn();
     }
@@ -287,13 +287,13 @@ function commentsAddToggle() {
 
 function checkRequired() {
     $('input[required]').focusout(function () {
-        if($(this).parent().find('span').length == 1)
+        if ($(this).parent().find('span').length == 1)
             $(this).parent()
                 .append(
-                    $('<span>')
-                        .addClass('glyphicon')
-                        .addClass('form-control-feedback')
-                );
+                $('<span>')
+                    .addClass('glyphicon')
+                    .addClass('form-control-feedback')
+            );
 
         if ($(this).val() == '') {
             $(this).parent()
@@ -322,7 +322,7 @@ function changeImgProfile() {
 }
 
 function loadGravatar() {
-    $('.gravatar').each(function() {
+    $('.gravatar').each(function () {
         $(this).attr('src', 'http://gravatar.com/avatar/' + CryptoJS.MD5($(this).attr('src')) + '?s=150');
     });
 }
