@@ -1,6 +1,8 @@
 /**
- * Created by loick on 18/03/15.
+ * #HCSocial
+ * @author Loïck Mahieux
  */
+
 var app = {};
 
 /**
@@ -82,7 +84,6 @@ app.tools.requiredInput = function () {
 app.news = {};
 
 /**
- * PRIVATE
  * Create news
  * @param id
  * @param admin
@@ -92,6 +93,7 @@ app.news = {};
  * @param date
  * @param time
  * @param message
+ * @private
  */
 app.news._create = function createNews(id, admin, username, mail, fullname, date, time, message) {
     $('#news-message').hide();
@@ -210,6 +212,20 @@ app.news._create = function createNews(id, admin, username, mail, fullname, date
     }
 };
 
+app.news.load = function () {
+    $.ajax({
+        url: '/news/loadAll',
+        success: function() {
+            //on success
+
+        },
+        error: function() {
+            //on error
+
+        }
+    });
+};
+
 /**
  * Delete news
  */
@@ -238,9 +254,58 @@ app.news.delete = function () {
 };
 
 /**
+ * Like Action
+ * @private
+ */
+app.news._likeAction = function(e) {
+    var news = $(this).parent().parent().parent();
+    $.ajax({
+        url: '/news/like/' + news.attr('data-news-id'),
+        success: function (data) {
+            //on success
+            if (data.display)
+                alert(data.message);
+
+            if (data.success) {
+                news.find('.like-count')
+                    .html(data.count);
+            }
+        },
+        error: function (data) {
+            //on error
+        }
+    });
+};
+
+/**
+ * Unlike Action
+ * @private
+ */
+app.news._unlikeAction = function() {
+    var news = $(this).parent().parent().parent();
+    $.ajax({
+        url: '/news/unlike/' + news.attr('data-news-id'),
+        success: function (data) {
+            //on success
+            if (data.display)
+                alert(data.message);
+
+            if (data.success) {
+                news.find('.like-count')
+                    .html(data.count);
+            }
+        },
+        error: function (data) {
+            //on error
+        }
+    });
+};
+
+/**
  * Like news
  */
 app.news.like = function () {
+
     $('.like-news').each(function () {
         var news = $(this).parent().parent().parent();
         $.ajax({
@@ -257,8 +322,6 @@ app.news.like = function () {
                         news.find('.like-news')
                             .removeClass('like-news')
                             .addClass('unlike-news')
-                            .unbind()
-                            .bind()
                         news.find('.like-text')
                             .html('Je n\'aime plus')
                     }
