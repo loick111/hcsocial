@@ -28,7 +28,7 @@ SQL;
     public function count($news)
     {
         $sql = <<<SQL
-SELECT COUNT(username) FROM likes
+SELECT COUNT(username) AS count FROM likes
   WHERE news = :news;
 SQL;
 

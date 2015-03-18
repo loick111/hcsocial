@@ -134,7 +134,43 @@ class NewsController extends Controller
 
         $res = [
             'success' => false,
-            'display' => false
+            'display' => true,
+            'count' => 0
+        ];
+
+        if (empty($modelNews->get($news))) {
+            $res['message'] = 'La publication n\'existe pas.';
+        } else {
+            $res['success'] = true;
+            $res['display'] = false;
+            $res['message'] = 'Réussi.';
+            $res['count'] = $modelLikes->count($news)['count'];
+
+            $res['liked'] = false;
+            if ($modelLikes->get($username, $news)) {
+                $res['liked'] = true;
+            }
+        }
+
+        echo json_encode($res);
+    }
+
+    public function like()
+    {
+        if (!Authentication::getInstance()->isAuthenticated()) {
+            throw new NotAuthenticatedException();
+        }
+
+        $this->getView()->ajax();
+        $news = $this->getParams()[0];
+        $username = Authentication::getInstance()->getUserName();
+
+        $modelNews = new newsModel();
+        $modelLikes = new likesModels();
+
+        $res = [
+            'success' => false,
+            'display' => true
         ];
 
         if (empty($modelNews->get($news))) {
@@ -142,7 +178,44 @@ class NewsController extends Controller
         } elseif (!empty($modelLikes->get($username, $news))) {
             $res['message'] = 'Vous aimez déjà cette publication.';
         } else {
+            $modelLikes->add($username, $news);
+            $res['success'] = true;
+            $res['display'] = false;
+            $res['message'] = 'Vous aimez la publication.';
+            $res['count'] = $modelLikes->count($news)['count'];
+        }
 
+        echo json_encode($res);
+    }
+
+    public function unlike()
+    {
+        if (!Authentication::getInstance()->isAuthenticated()) {
+            throw new NotAuthenticatedException();
+        }
+
+        $this->getView()->ajax();
+        $news = $this->getParams()[0];
+        $username = Authentication::getInstance()->getUserName();
+
+        $modelNews = new newsModel();
+        $modelLikes = new likesModels();
+
+        $res = [
+            'success' => false,
+            'display' => true
+        ];
+
+        if (empty($modelNews->get($news))) {
+            $res['message'] = 'La publication n\'existe pas.';
+        } elseif (empty($modelLikes->get($username, $news))) {
+            $res['message'] = 'Vous n\'aimez pas cette publication.';
+        } else {
+            $modelLikes->delete($username, $news);
+            $res['success'] = true;
+            $res['display'] = false;
+            $res['message'] = 'Vous n\'aimez plus la publication.';
+            $res['count'] = $modelLikes->count($news)['count'];
         }
 
         echo json_encode($res);
