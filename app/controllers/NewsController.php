@@ -23,25 +23,34 @@ class NewsController extends Controller
         $username = Authentication::getInstance()->getUserName();
         $message = Input::post('message');
 
-        $model = new newsModel();
+        if(empty($message)) {
+            $res = [
+                'display' => true,
+                'success' => false,
+                'message' => 'Message vide.'
+            ];
+        }else {
 
-        $auth = Authentication::getInstance()->getOptions();
+            $model = new newsModel();
 
-        $res = [
-            'username' => $username,
-            'fullname' => $auth['firstname'] . ' ' . $auth['lastname'],
-            'mail' => $auth['mail'],
-            'date' => date('Y-m-d H:i:s'),
-            'message' => nl2br($message),
-            'success' => false
-        ];
+            $auth = Authentication::getInstance()->getOptions();
 
-        if ($res['id'] = $model->add([
-            'user' => $username,
-            'message' => $message
-        ])
-        ) {
-            $res['success'] = true;
+            $res = [
+                'username' => $username,
+                'fullname' => $auth['firstname'] . ' ' . $auth['lastname'],
+                'mail' => $auth['mail'],
+                'date' => date('Y-m-d H:i:s'),
+                'message' => nl2br($message),
+                'success' => false
+            ];
+
+            if ($res['id'] = $model->add([
+                'user' => $username,
+                'message' => $message
+            ])
+            ) {
+                $res['success'] = true;
+            }
         }
 
         echo json_encode($res);
@@ -54,8 +63,33 @@ class NewsController extends Controller
         $news = $model->getAll();
 
         foreach($news as &$n)
-            $n['message'] = nl2br($n['message']);
+            $n['message'] = htmlentities(nl2br($n['message']));
 
         echo json_encode($news);
+    }
+
+    public function delete() {
+        $this->getView()->ajax();
+        $model = new newsModel();
+
+        $id = $this->getParams()[0];
+        $news = $model->get($id);
+
+        $res = [
+            'display' => true,
+            'success' => false
+        ];
+
+        if(!$news) {
+            $res['message'] = 'La news n\'existe pas.';
+        }elseif($news['username'] != Authentication::getInstance()->getUserName()) {
+            $res['message'] = 'Vous n\'êtes pas l\'auteur de la news.';
+        }else {
+            $model->delete($id);
+            $res['success'] = true;
+            $res['message'] = 'La news a bien été supprimée.';
+        }
+
+        echo json_encode($res);
     }
 }

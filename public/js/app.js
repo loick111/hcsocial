@@ -6,7 +6,7 @@ function start() {
     loadNews();
     checkRequired();
     changeImgProfile();
-    commentsUtils();
+    newsUtils();
     loadGravatar();
     formUtils();
 }
@@ -37,20 +37,23 @@ function formUtils() {
 
     formAjax('#form-add-news', function(data) {
         //on success
-        date = new Date(data.date);
-        createNews(data.id, data.username, data.mail, data.fullname, date.toLocaleDateString(), date.toLocaleTimeString(), data.message);
+        if(data.display)
+            alert(data.message);
 
-        $('#form-add-news')[0].reset();
+        if(data.success) {
+            date = new Date(data.date);
+            createNews(data.id, data.username, data.mail, data.fullname, date.toLocaleDateString(), date.toLocaleTimeString(), data.message);
 
-        commentsDisplayToggle();
-        commentsAddToggle();
+            $('#form-add-news')[0].reset();
+            newsUtils();
+        }
     }, function(data) {
         //on error
-
     });
 }
 
-function commentsUtils() {
+function newsUtils() {
+    deleteNews();
     commentsDisplayToggle();
     commentsAddToggle();
 }
@@ -70,6 +73,28 @@ function commentsDisplayToggle() {
             }
         });
 
+    })
+}
+
+function deleteNews() {
+    $('.delete-news').click(function() {
+        var news = $(this).parent().parent().parent();
+        news.fadeOut();
+        $.ajax({
+            url: '/news/delete/' + news.attr('data-news-id'),
+            success: function(data) {
+                if (!data.success() && data.display) {
+                    alert(data.message);
+                }
+
+                if (data.success) {
+                    news.remove();
+                }
+            },
+            error: function(data) {
+                alert('Erreur lors de la suppression de la news.');
+            }
+        });
     })
 }
 
@@ -97,7 +122,7 @@ function loadNews() {
                 createNews(data[news].id, data[news].username, data[news].mail, data[news].firstname + ' ' + data[news].lastname, date.toLocaleDateString(), date.toLocaleTimeString(), data[news].message);
             }
 
-            commentsUtils();
+            newsUtils();
         },
         error: function(data) {
             alert('Erreur lors du chargement des news.');
@@ -148,6 +173,26 @@ function createNews(id, username, mail, fullname, date, time, message) {
                             .html(', le ' + date + ' à ' + time)
                     )
                 )
+                    .append(
+                    $('<a>')
+                        .addClass('delete-news')
+                        .addClass('pull-right')
+                        .append(
+                        $('<span>')
+                            .addClass('glyphicon glyphicon-remove')
+                    )
+                        .hide()
+                        .fadeIn()
+                )
+                    .append(
+                    $('<a>')
+                        .addClass('modify-news pull-right')
+                        .append(
+                        $('<span>')
+                            .addClass('glyphicon glyphicon-pencil')
+                    )
+                        .hide()
+                )
             )
                 .append(
                 $('<div>')
@@ -160,6 +205,22 @@ function createNews(id, username, mail, fullname, date, time, message) {
                 .append(
                 $('<div>')
                     .attr('class', 'panel-footer')
+                    .append(
+                    $('<a>')
+                        .addClass('like-news')
+                        .append(
+                        $('<span>')
+                            .html('0')
+                    )
+                        .append(
+                        $('<span>')
+                            .addClass('glyphicon glyphicon-thumbs-up')
+                    )
+                        .append(
+                        $('<span>')
+                            .html('J\'aime')
+                    )
+                )
                     .append(
                     $('<a>')
                         .attr('class', 'comments-display')

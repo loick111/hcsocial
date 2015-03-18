@@ -9,10 +9,12 @@
                 </div>
                 <form method="post" action="/news/add" id="form-add-news">
                     <div class="panel-body">
-                        <textarea name="message" class="form-control" rows="3" placeholder="Votre message..."></textarea>
+                        <textarea name="message" class="form-control" rows="3" placeholder="Votre message..." required></textarea>
                     </div>
                     <div class="panel-footer">
-                        <input type="submit" class="btn btn-sm btn-primary" value="Publier">
+                        <a class="btn"><span class="glyphicon glyphicon-picture"></span>Ajouter une photo</a>
+                        <a class="btn"><span class="glyphicon glyphicon-paperclip"></span>Ajouter un fichier</a>
+                        <input type="submit" class="btn btn-sm btn-primary pull-right" value="Publier">
                     </div>
                 </form>
             </div>
