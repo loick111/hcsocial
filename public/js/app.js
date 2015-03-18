@@ -31,6 +31,18 @@ app.tools.formAjax = function (form, success, error) {
     });
 };
 
+app.tools.ajax = function(url, success, error) {
+    $.ajax({
+        url: url,
+        success: function(data) {
+            if(data.display)
+                alert(data.message);
+            success(data);
+        },
+        error: error
+    });
+};
+
 /**
  * Load all pictures from Gravatar with class 'gravatar'
  */
@@ -213,17 +225,31 @@ app.news._create = function createNews(id, admin, username, mail, fullname, date
 };
 
 app.news.load = function () {
-    $.ajax({
-        url: '/news/loadAll',
-        success: function() {
-            //on success
+    app.tools.ajax(
+        '/news/loadAll',
+        function(data) {
+            alert('lol');
+            if(data.success) {
+                for(var news in data.news) {
+                    var date = new Date(data[news].date * 1000);
 
+                    createNews(
+                        data[news].id,
+                        data[news].admin,
+                        data[news].username,
+                        data[news].mail,
+                        data[news].firstname + ' ' + data[news].lastname,
+                        date.toLocaleDateString(),
+                        date.toLocaleTimeString(),
+                        data[news].message
+                    );
+                }
+            }
         },
-        error: function() {
-            //on error
-
+        function() {
+            alert('Erreur de chargement des publications.');
         }
-    });
+    );
 };
 
 /**
