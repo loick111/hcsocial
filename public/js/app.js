@@ -41,8 +41,8 @@ function formUtils() {
             alert(data.message);
 
         if(data.success) {
-            date = new Date(data.date);
-            createNews(data.id, data.username, data.mail, data.fullname, date.toLocaleDateString(), date.toLocaleTimeString(), data.message);
+            date = new Date(data.date * 1000);
+            createNews(data.id, true, data.username, data.mail, data.fullname, date.toLocaleDateString(), date.toLocaleTimeString(), data.message);
 
             $('#form-add-news')[0].reset();
             newsUtils();
@@ -78,23 +78,25 @@ function commentsDisplayToggle() {
 
 function deleteNews() {
     $('.delete-news').click(function() {
-        var news = $(this).parent().parent().parent();
-        news.fadeOut();
-        $.ajax({
-            url: '/news/delete/' + news.attr('data-news-id'),
-            success: function(data) {
-                if (!data.success() && data.display) {
-                    alert(data.message);
-                }
+        if(confirm('Êtes-vous sur de vouloir supprimer cette publication ?')) {
+            var news = $(this).parent().parent().parent();
+            $.ajax({
+                url: '/news/delete/' + news.attr('data-news-id'),
+                success: function(data) {
+                    if (!data.success && data.display) {
+                        alert(data.message);
+                    }
 
-                if (data.success) {
-                    news.remove();
+                    if (data.success) {
+                        news.remove();
+                        news.fadeOut();
+                    }
+                },
+                error: function(data) {
+                    alert('Erreur lors de la suppression de la publication.');
                 }
-            },
-            error: function(data) {
-                alert('Erreur lors de la suppression de la news.');
-            }
-        });
+            });
+        }
     })
 }
 
@@ -118,19 +120,19 @@ function loadNews() {
             }
 
             for(news in data) {
-                date = new Date(data[news].date);
-                createNews(data[news].id, data[news].username, data[news].mail, data[news].firstname + ' ' + data[news].lastname, date.toLocaleDateString(), date.toLocaleTimeString(), data[news].message);
+                date = new Date(data[news].date * 1000);
+                createNews(data[news].id, data[news].admin, data[news].username, data[news].mail, data[news].firstname + ' ' + data[news].lastname, date.toLocaleDateString(), date.toLocaleTimeString(), data[news].message);
             }
 
             newsUtils();
         },
         error: function(data) {
-            alert('Erreur lors du chargement des news.');
+            alert('Erreur lors du chargement des publications.');
         }
     });
 }
 
-function createNews(id, username, mail, fullname, date, time, message) {
+function createNews(id, admin, username, mail, fullname, date, time, message) {
     $('#news-message').remove();
 
     $('#news')
@@ -182,7 +184,6 @@ function createNews(id, username, mail, fullname, date, time, message) {
                             .addClass('glyphicon glyphicon-remove')
                     )
                         .hide()
-                        .fadeIn()
                 )
                     .append(
                     $('<a>')
@@ -257,7 +258,12 @@ function createNews(id, username, mail, fullname, date, time, message) {
         )
             .hide()
             .fadeIn()
-    )
+    );
+
+    if(admin) {
+        $('div[data-news-id=' + id + '] .delete-news').fadeIn();
+        //$('div[data-news-id=' + id + '] .modify-news').fadeIn();
+    }
 }
 
 function commentsAddToggle() {

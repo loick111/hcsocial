@@ -39,7 +39,8 @@ class NewsController extends Controller
                 'username' => $username,
                 'fullname' => $auth['firstname'] . ' ' . $auth['lastname'],
                 'mail' => $auth['mail'],
-                'date' => date('Y-m-d H:i:s'),
+                'admin' => true,
+                'date' => time(),
                 'message' => nl2br($message),
                 'success' => false
             ];
@@ -62,8 +63,14 @@ class NewsController extends Controller
         $model = new newsModel();
         $news = $model->getAll();
 
-        foreach($news as &$n)
+        foreach($news as &$n) {
             $n['message'] = htmlentities(nl2br($n['message']));
+            $n['date'] = strtotime($n['date']);
+
+            $n['admin'] = false;
+            if($n['username'] == Authentication::getInstance()->getUserName())
+                $n['admin'] = true;
+        }
 
         echo json_encode($news);
     }

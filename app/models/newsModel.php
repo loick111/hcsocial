@@ -20,7 +20,7 @@ class newsModel extends Model
 (SELECT * FROM news
   JOIN users ON news.username = users.username
   ORDER BY date DESC
-  LIMIT 5)
+  LIMIT 100)
   ORDER BY date ASC;
 SQL;
         return DatabaseProvider::connection()->query($sql);
