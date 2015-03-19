@@ -35,7 +35,7 @@ app.news.load = function () {
             }
         },
         function () {
-            alert('Erreur de chargement des publications.');
+            alert('Erreur lors du chargement des publications.');
         }
     );
 };
@@ -65,20 +65,19 @@ app.news.delete = function (newsId) {
     elem.find('.delete-news')
         .click(function () {
         if (confirm('Êtes-vous sur de vouloir supprimer cette publication ?')) {
-            var news = $(this).parent().parent().parent();
             $.ajax({
-                url: '/news/delete/' + news.attr('data-news-id'),
+                url: '/news/delete/' + elem.attr('data-news-id'),
                 success: function (data) {
                     if (!data.success && data.display) {
                         alert(data.message);
                     }
 
                     if (data.success) {
-                        news.remove();
-                        news.fadeOut();
+                        elem.remove();
+                        elem.fadeOut();
                     }
                 },
-                error: function (data) {
+                error: function () {
                     alert('Erreur lors de la suppression de la publication.');
                 }
             });
@@ -99,7 +98,6 @@ app.news.like = function (newsId) {
         $.ajax({
             url: '/news/unlike/' + elem.attr('data-news-id'),
             success: function (data) {
-                //on success
                 if (data.display)
                     alert(data.message);
 
@@ -107,8 +105,8 @@ app.news.like = function (newsId) {
                     _unlikeProcess(data);
                 }
             },
-            error: function (data) {
-                //on error
+            error: function () {
+                alert('Erreur lors du J\'aime.');
             }
         });
     };
@@ -133,7 +131,6 @@ app.news.like = function (newsId) {
         $.ajax({
             url: '/news/like/' + elem.attr('data-news-id'),
             success: function (data) {
-                //on success
                 if (data.display)
                     alert(data.message);
 
@@ -141,8 +138,8 @@ app.news.like = function (newsId) {
                     _likeProcess(data);
                 }
             },
-            error: function (data) {
-                //on error
+            error: function () {
+                alert('Erreur lors du J\'aime pas.');
             }
         });
     };
