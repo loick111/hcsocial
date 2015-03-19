@@ -39,7 +39,7 @@ class Router
      */
     public function matchCurrentRequest()
     {
-        $path = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/';
+        $path = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
         $method = $_SERVER["REQUEST_METHOD"];
 
         $this->currentRoute = new Route();
