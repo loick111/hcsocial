@@ -30,7 +30,10 @@
 {{ helpers.assets.js('app.tools') }}
 {{ helpers.assets.js('app.forms') }}
 {{ helpers.assets.js('app.news') }}
-{{ helpers.assets.js('home') }}
+
+{% block js %}
+    {{ helpers.assets.js('guest') }}
+{% endblock %}
 
 </body>
 </html>

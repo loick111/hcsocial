@@ -154,7 +154,7 @@ app.news.like = function () {
                         $(this).find('.like-text')
                             .html('Je n\'aime plus');
                     } else {
-                        $(this).find('.like-news')
+                        $(this).find('.unlike-news')
                             .removeClass('unlike-news')
                             .addClass('like-news')
                             .click(_likeAction);
