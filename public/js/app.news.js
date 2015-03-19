@@ -43,24 +43,27 @@ app.news.load = function () {
 /**
  * Utils news
  */
-app.news.utils = function () {
+app.news.utils = function (newsId) {
     if (app.debug)
         console.log('app.news.utils()');
 
-    app.news.delete();
-    app.news.like();
-    app.news.comments.addToggle();
-    app.news.comments.displayToggle();
+    app.news.delete(newsId);
+    app.news.like(newsId);
+    app.news.comments.addToggle(newsId);
+    app.news.comments.displayToggle(newsId);
 };
 
 /**
  * Delete news
  */
-app.news.delete = function () {
+app.news.delete = function (newsId) {
     if (app.debug)
         console.log('app.news.delete()');
 
-    $('.delete-news').click(function () {
+    var elem = $('.news[data-news-id=' + newsId + ']');
+
+    elem.find('.delete-news')
+        .click(function () {
         if (confirm('Êtes-vous sur de vouloir supprimer cette publication ?')) {
             var news = $(this).parent().parent().parent();
             $.ajax({
@@ -86,50 +89,22 @@ app.news.delete = function () {
 /**
  * Like news
  */
-app.news.like = function () {
+app.news.like = function (newsId) {
     if (app.debug)
         console.log('app.news.like()');
 
-    /**
-     * Like Action
-     * @private
-     */
-    var _likeAction = function (e) {
-        var news = $(this).parent().parent().parent();
-        $.ajax({
-            url: '/news/like/' + news.attr('data-news-id'),
-            success: function (data) {
-                //on success
-                if (data.display)
-                    alert(data.message);
+    var elem = $('.news[data-news-id=' + newsId + ']');
 
-                if (data.success) {
-                    news.find('.like-count')
-                        .html(data.count);
-                }
-            },
-            error: function (data) {
-                //on error
-            }
-        });
-    };
-
-    /**
-     * Unlike Action
-     * @private
-     */
     var _unlikeAction = function () {
-        var news = $(this).parent().parent().parent();
         $.ajax({
-            url: '/news/unlike/' + news.attr('data-news-id'),
+            url: '/news/unlike/' + elem.attr('data-news-id'),
             success: function (data) {
                 //on success
                 if (data.display)
                     alert(data.message);
 
                 if (data.success) {
-                    news.find('.like-count')
-                        .html(data.count);
+                    _unlikeProcess(data);
                 }
             },
             error: function (data) {
@@ -138,29 +113,65 @@ app.news.like = function () {
         });
     };
 
-    $('.news').each(function () {
+    var _unlikeProcess = function (data) {
+        elem.find('.unlike-news')
+            .removeClass('unlike-news')
+            .addClass('like-news');
+
+        elem.find('.like-news')
+            .unbind()
+            .click(_likeAction);
+
+        elem.find('.like-count')
+            .html(data.count);
+
+        elem.find('.like-text')
+            .html('J\'aime');
+    };
+
+    var _likeAction = function () {
+        $.ajax({
+            url: '/news/like/' + elem.attr('data-news-id'),
+            success: function (data) {
+                //on success
+                if (data.display)
+                    alert(data.message);
+
+                if (data.success) {
+                    _likeProcess(data);
+                }
+            },
+            error: function (data) {
+                //on error
+            }
+        });
+    };
+
+    var _likeProcess = function (data) {
+        elem.find('.like-news')
+            .removeClass('like-news')
+            .addClass('unlike-news');
+
+        elem.find('.unlike-news')
+            .unbind()
+            .click(_unlikeAction);
+
+        elem.find('.like-count')
+            .html(data.count);
+
+        elem.find('.like-text')
+            .html('Je n\'aime plus');
+    };
+
+    elem.each(function () {
         app.tools.ajax(
             '/news/countLike/' + $(this).attr('data-news-id'),
             function (data) {
                 if (data.success) {
-                    $('.news[data-news-id=' + data.id + ']').find('.like-count')
-                        .html(data.count);
-
-                    console.log(data);
-
                     if (data.liked) {
-                        $('.news[data-news-id=' + data.id + ']').find('.like-news')
-                            .removeClass('like-news')
-                            .addClass('unlike-news');
-                        $('.news[data-news-id=' + data.id + ']').find('.like-text')
-                            .html('Je n\'aime plus');
+                        _likeProcess(data);
                     } else {
-                        $('.news[data-news-id=' + data.id + ']').find('.unlike-news')
-                            .removeClass('unlike-news')
-                            .addClass('like-news')
-                            .click(_likeAction);
-                        $('.news[data-news-id=' + data.id + ']').find('.like-text')
-                            .html('J\'aime');
+                        _unlikeProcess(data);
                     }
                 }
             },
@@ -302,7 +313,7 @@ app.news._create = function createNews(id, admin, username, mail, fullname, date
         $('div[data-news-id=' + id + '] .delete-news').fadeIn();
     }
 
-    app.news.utils();
+    app.news.utils(id);
 };
 
 /**
@@ -314,11 +325,13 @@ app.news.comments = {};
 /**
  * Comments add input on news
  */
-app.news.comments.addToggle = function () {
+app.news.comments.addToggle = function (newsId) {
     if (app.debug)
         console.log('app.news.comments.addToggle()');
 
-    $('.comments-action').click(function () {
+    var elem = $('.news[data-news-id=' + newsId + ']');
+
+    elem.find('.comments-action').click(function () {
         $(this)
             .parent()
             .parent()
@@ -339,12 +352,14 @@ app.news.comments.addToggle = function () {
 /**
  * Display comments on news
  */
-app.news.comments.displayToggle = function () {
+app.news.comments.displayToggle = function (newsId) {
     if (app.debug)
         console.log('app.news.comments.commentsDisplayToggle()');
 
-    $(".comments").hide();
-    $(".comments-display").click(function () {
+    var elem = $('.news[data-news-id=' + newsId + ']');
+
+    elem.find(".comments").hide();
+    elem.find(".comments-display").click(function () {
         $(this).parent().parent().find(".comments").slideToggle("fast", function () {
             if ($(this).is(':visible')) {
                 $(this).parent()
