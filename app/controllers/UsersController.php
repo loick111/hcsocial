@@ -94,7 +94,7 @@ class UsersController extends Controller
         $username = Input::post('username');
         $mail = Input::post('mail');
         $firstname = Input::post('firstname');
-        $lastname = Input::post('lastname');
+        $lastname = strtoupper(Input::post('lastname'));
         $password = Input::post('password');
         $password2 = Input::post('password2');
 

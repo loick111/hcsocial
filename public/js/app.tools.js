@@ -109,3 +109,21 @@ app.tools.requiredInput = function () {
         }
     });
 };
+
+/**
+ * Add alert
+ * Available type = [danger, warning, info, success]
+ */
+app.tools.alert = function (title, message, type) {
+    $('#alert').find('h4').html(title);
+    $('#alert').find('p').html(message);
+    $('#alert')
+        .removeClass('alert-danger')
+        .removeClass('alert-info')
+        .removeClass('alert-warning')
+        .removeClass('alert-success')
+        .addClass(type);
+
+    $('#alert').fadeIn();
+    $('#alert').delay(2000).fadeOut();
+};

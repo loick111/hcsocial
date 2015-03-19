@@ -13,15 +13,23 @@
                                   required></textarea>
                     </div>
                     <div class="panel-footer">
-                        <a class="btn"><span class="glyphicon glyphicon-picture"></span>Ajouter une photo</a>
-                        <a class="btn"><span class="glyphicon glyphicon-paperclip"></span>Ajouter un fichier</a>
+                        <a class="btn"><span class="glyphicon glyphicon-picture"></span></a>
+                        <a class="btn"><span class="glyphicon glyphicon-paperclip"></span></a>
                         <input type="submit" class="btn btn-sm btn-primary pull-right" value="Publier">
                     </div>
                 </form>
             </div>
         </div>
 
-        <div id="news"></div>
+        <div class="col-lg-4 col-lg-offset-4 alert alert-dismissable" role="alert" id="alert">
+            <h4>Erreur !</h4>
+
+            <p>Veuillez activer JavaScript.</p>
+        </div>
+
+        <div id="news">
+
+        </div>
 
         <div class="col-lg-6 col-lg-offset-3" id="news-message">
             <img src="/public/img/loading.gif" alt="Chargement..." class="center-block">

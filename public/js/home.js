@@ -7,13 +7,16 @@ $(document).ready(function() {
     if (app.debug)
         console.log('home.ready()');
 
-    // TOOLS
+    //TOOLS
     app.tools.loadGravatar();
     app.tools.requiredInput();
+
+    //ALERT
+    $('#alert').hide();
 
     //FORMS
     app.forms.addNews();
 
-    // NEWS
+    //NEWS
     app.news.load();
 });
