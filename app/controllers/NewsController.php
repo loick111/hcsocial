@@ -135,6 +135,7 @@ class NewsController extends Controller
         $res = [
             'success' => false,
             'display' => true,
+            'id' => $news,
             'count' => 0
         ];
 

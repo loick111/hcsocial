@@ -143,22 +143,23 @@ app.news.like = function () {
             '/news/countLike/' + $(this).attr('data-news-id'),
             function (data) {
                 if (data.success) {
-                    $(this).find('.like-count')
+                    $('.news[data-news-id=' + data.id + ']').find('.like-count')
                         .html(data.count);
 
+                    console.log(data);
+
                     if (data.liked) {
-                        $(this).find('.like-news')
+                        $('.news[data-news-id=' + data.id + ']').find('.like-news')
                             .removeClass('like-news')
-                            .addClass('unlike-news')
-                            .click(_unlikeAction)
-                        $(this).find('.like-text')
+                            .addClass('unlike-news');
+                        $('.news[data-news-id=' + data.id + ']').find('.like-text')
                             .html('Je n\'aime plus');
                     } else {
-                        $(this).find('.unlike-news')
+                        $('.news[data-news-id=' + data.id + ']').find('.unlike-news')
                             .removeClass('unlike-news')
                             .addClass('like-news')
                             .click(_likeAction);
-                        $(this).find('.like-text')
+                        $('.news[data-news-id=' + data.id + ']').find('.like-text')
                             .html('J\'aime');
                     }
                 }
