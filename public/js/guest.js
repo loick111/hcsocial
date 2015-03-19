@@ -14,7 +14,4 @@ $(document).ready(function () {
     //FORMS
     app.forms.login();
     app.forms.signin();
-
-    // NEWS
-    app.news.load();
 });
