@@ -1,41 +1,39 @@
 {% extends 'layout/connected' %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="col-lg-6 col-lg-offset-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Exprimez-vous
-                </div>
-                <form method="post" action="/news/add" id="form-add-news">
-                    <div class="panel-body">
-                        <textarea name="message" class="form-control" rows="3" placeholder="Votre message..."
-                                  required></textarea>
-                    </div>
-                    <div class="panel-footer">
-                        <a class="btn"><span class="glyphicon glyphicon-picture"></span></a>
-                        <a class="btn"><span class="glyphicon glyphicon-paperclip"></span></a>
-                        <input type="submit" class="btn btn-sm btn-primary pull-right" value="Publier">
-                    </div>
-                </form>
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Exprimez-vous
             </div>
+            <form method="post" action="/news/add" id="form-add-news">
+                <div class="panel-body">
+                    <textarea name="message" class="form-control" rows="3" placeholder="Votre message..."
+                              required></textarea>
+                </div>
+                <div class="panel-footer">
+                    <a class="btn"><span class="glyphicon glyphicon-picture"></span></a>
+                    <a class="btn"><span class="glyphicon glyphicon-paperclip"></span></a>
+                    <input type="submit" class="btn btn-sm btn-primary pull-right" value="Publier">
+                </div>
+            </form>
         </div>
+    </div>
 
-        <div class="col-lg-4 col-lg-offset-4 alert alert-dismissable" role="alert" id="alert">
-            <h4>Erreur !</h4>
+    <div class="col-lg-4 col-lg-offset-4 alert alert-dismissable" role="alert" id="alert">
+        <h4>Erreur !</h4>
 
-            <p>Veuillez activer JavaScript.</p>
-        </div>
+        <p>Veuillez activer JavaScript.</p>
+    </div>
 
-        <div id="news">
+    <div id="news">
 
-        </div>
+    </div>
 
-        <div class="col-lg-6 col-lg-offset-3" id="news-message">
-            <img src="/public/img/loading.gif" alt="Chargement..." class="center-block">
+    <div class="col-lg-6 col-lg-offset-3" id="news-message">
+        <img src="/public/img/loading.gif" alt="Chargement..." class="center-block">
 
-            <h1>Chargement...</h1>
-        </div>
+        <h1>Chargement...</h1>
     </div>
 {% endblock %}
 
