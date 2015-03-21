@@ -35,7 +35,7 @@ app.news.load = function () {
             }
         },
         function () {
-            alert('Erreur lors du chargement des publications.');
+            app.tools.alert('Erreur !', 'Erreur lors du chargement des publications.', 'alert-danger');
         }
     );
 };
@@ -78,7 +78,7 @@ app.news.delete = function (newsId) {
                     }
                 },
                 error: function () {
-                    alert('Erreur lors de la suppression de la publication.');
+                    app.tools.alert('Erreur !', 'Erreur lors de la suppression de la publication.', 'alert-danger');
                 }
             });
         }
@@ -106,7 +106,7 @@ app.news.like = function (newsId) {
                 }
             },
             error: function () {
-                alert('Erreur lors du J\'aime.');
+                app.tools.alert('Erreur !', 'Erreur lors du J\'aime.', 'alert-danger');
             }
         });
     };
@@ -139,7 +139,7 @@ app.news.like = function (newsId) {
                 }
             },
             error: function () {
-                alert('Erreur lors du J\'aime pas.');
+                app.tools.alert('Erreur !', 'Erreur lors du J\'aime pas.', 'alert-danger');
             }
         });
     };
@@ -173,7 +173,7 @@ app.news.like = function (newsId) {
                 }
             },
             function () {
-                alert('Erreur lors du chargement des "J\'aime."')
+                app.tools.alert('Erreur !', 'Erreur lors du chargement des "J\'aime."', 'alert-danger')
             }
         );
     });
@@ -311,63 +311,4 @@ app.news._create = function createNews(id, admin, username, mail, fullname, date
     }
 
     app.news.utils(id);
-};
-
-/**
- * COMMENTS
- * @type {{}}
- */
-app.news.comments = {};
-
-/**
- * Comments add input on news
- */
-app.news.comments.addToggle = function (newsId) {
-    if (app.debug)
-        console.log('app.news.comments.addToggle()');
-
-    var elem = $('.news[data-news-id=' + newsId + ']');
-
-    elem.find('.comments-action').click(function () {
-        $(this)
-            .parent()
-            .parent()
-            .append(
-            $('<div>')
-                .attr('class', 'panel-footer')
-                .append(
-                $('<input>')
-                    .attr('type', 'text')
-                    .attr('class', 'form-control')
-                    .attr('placeholder', 'Écrire un commentaire...')
-            )
-        );
-        $(this).remove();
-    });
-};
-
-/**
- * Display comments on news
- */
-app.news.comments.displayToggle = function (newsId) {
-    if (app.debug)
-        console.log('app.news.comments.commentsDisplayToggle()');
-
-    var elem = $('.news[data-news-id=' + newsId + ']');
-
-    elem.find(".comments").hide();
-    elem.find(".comments-display").click(function () {
-        $(this).parent().parent().find(".comments").slideToggle("fast", function () {
-            if ($(this).is(':visible')) {
-                $(this).parent()
-                    .find(".comments-display")
-                    .html('<span class="glyphicon glyphicon-comment"></span>Masquer les commentaires')
-            } else {
-                $(this).parent()
-                    .find(".comments-display")
-                    .html('<span class="glyphicon glyphicon-comment"></span>Afficher les commentaires');
-            }
-        });
-
-    })
 };
