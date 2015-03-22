@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 
+use app\models\newsModel;
 use SFramework\mvc\Controller;
 
 class CommentsController extends Controller
@@ -20,6 +21,8 @@ class CommentsController extends Controller
     public function addPOST()
     {
         $news = $this->getParams()[0];
+        $model = new newsModel();
+
 
     }
 }

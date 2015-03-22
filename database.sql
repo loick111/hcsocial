@@ -24,6 +24,7 @@ CREATE TABLE comments (
   `id`       INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(40)         NOT NULL,
   `news`     INT(11)             NOT NULL,
+  `message` LONGTEXT NOT NULL,
   `date`     TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT `fk_comments_users`
   FOREIGN KEY (username) REFERENCES users (username)
