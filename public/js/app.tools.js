@@ -16,7 +16,7 @@ app.tools = {};
  * @param error
  */
 app.tools.ajaxForm = function (form, success, error) {
-    $(form).submit(function () {
+    form.submit(function () {
         var data = $(this).serialize();
         $.ajax({
             type: $(this).attr("method"),

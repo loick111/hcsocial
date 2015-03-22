@@ -296,10 +296,6 @@ app.news._create = function createNews(id, admin, username, mail, fullname, date
             ).append(
                 $('<div>')
                     .attr('class', 'panel-body comments')
-                    .append(
-                    $('<p>')
-                        .html('Pas de commentaires')
-                )
             )
         )
             .hide()

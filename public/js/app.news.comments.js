@@ -26,12 +26,20 @@ app.news.comments.addToggle = function (newsId) {
             $('<div>')
                 .attr('class', 'panel-footer')
                 .append(
-                $('<input>')
-                    .attr('type', 'text')
-                    .attr('class', 'form-control')
-                    .attr('placeholder', 'Écrire un commentaire...')
+                $('<form>')
+                    .attr('method', 'post')
+                    .attr('action', '/comments/add/' + newsId)
+                    .addClass('form-add-comments')
+                    .append(
+                    $('<input>')
+                        .attr('type', 'text')
+                        .addClass('form-control')
+                        .attr('name', 'comments')
+                        .attr('placeholder', 'Écrire un commentaire...')
+                )
             )
         );
+        app.forms.addComments($(this).parent().parent().find('form'));
         $(this).remove();
     });
 };
@@ -62,38 +70,50 @@ app.news.comments.displayToggle = function (newsId) {
     })
 };
 
-app.news.comments._create = function(username, firstname, lastname, mail, comment) {
-    $('<div>')
-        .addClass('media')
-        .addClass('comments')
+/**
+ * Create comments
+ * @param username
+ * @param firstname
+ * @param lastname
+ * @param mail
+ * @param comment
+ * @private
+ */
+app.news.comments._create = function(newsId, username, firstname, lastname, mail, date, time, comment) {
+    $('.news[data-news-id=' + newsId + ']')
+        .find('comments')
         .append(
         $('<div>')
-            .addClass('media-left')
+            .addClass('media')
             .append(
-            $('<a>')
-                .attr('href', '/users/show/' + username)
+            $('<div>')
+                .addClass('media-left')
                 .append(
-                $('<img>')
-                    .addClass('img-circle')
-                    .addClass('gravatar')
-                    .attr('alt', firstname + ' ' + lastname)
-                    .attr('src', mail)
+                $('<a>')
+                    .attr('href', '/users/show/' + username)
+                    .append(
+                    $('<img>')
+                        .addClass('img-circle')
+                        .addClass('gravatar')
+                        .attr('alt', firstname + ' ' + lastname)
+                        .attr('src', mail)
+                )
+            )
+        ).append(
+            $('<div>')
+                .addClass('media-body')
+                .append(
+                $('<a>')
+                    .addClass('pull-left')
+                    .attr('href', '/users/show/' + username)
+                    .html(firstname + ' ' + lastname)
+            ).append(
+                $('<span>')
+                    .html(', le ' + date + ' à ' + time)
+            ).append(
+                $('<p>')
+                    .html(comment)
             )
         )
-    ).append(
-        $('<div>')
-            .addClass('media-body')
-            .append(
-            $('<a>')
-                .addClass('pull-left')
-                .attr('href', '/users/show/' + username)
-                .html(firstname + ' ' + lastname)
-        ).append(
-            $('<span>')
-                .html(', le ' + date.date + ' à ' + date.time)
-        ).append(
-            $('<p>')
-                .html(comment)
-        )
-    )
+    );
 };
