@@ -9,11 +9,6 @@
 namespace app\controllers;
 
 
-use app\models\likesModels;
-use app\models\newsModel;
-use SFramework\Exceptions\NotAuthenticatedException;
-use SFramework\Helpers\Authentication;
-use SFramework\Helpers\Input;
 use SFramework\mvc\Controller;
 
 class CommentsController extends Controller
