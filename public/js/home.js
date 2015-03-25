@@ -19,4 +19,5 @@ $(document).ready(function() {
 
     //NEWS
     app.news.load();
+    //setInterval(app.news.load, 2000);
 });

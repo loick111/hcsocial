@@ -16,10 +16,13 @@ app.news.load = function () {
     if (app.debug)
         console.log('app.news.load()');
 
-    //load on start
     app.tools.ajax(
         '/news/loadAll',
         function (data) {
+            if (data.length == 0) {
+                app.tools.alert('INFO', 'Pas de publications.', 'alert-info');
+
+            }
             for (news in data) {
                 var date = app.tools.dateTime(data[news].date);
                 app.news._create(
@@ -34,6 +37,8 @@ app.news.load = function () {
                 );
                 app.news.comments.load(data[news].id);
             }
+
+            $('#news-message').remove();
         },
         function () {
             app.tools.alert('Erreur !', 'Erreur lors du chargement des publications.', 'alert-danger');
@@ -195,7 +200,6 @@ app.news._create = function createNews(id, admin, username, mail, fullname, date
     if (app.debug)
         console.log('app.news._create()');
 
-    $('#news-message').remove();
     $('#news')
         .attr('data-news-latest', id)
         .prepend(

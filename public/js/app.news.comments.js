@@ -21,6 +21,9 @@ app.news.comments.load = function (newsId) {
         '/comments/load/' + newsId,
         function (data) {
             if (data.success) {
+                if (data.comments.length == 0) {
+                    app.tools.alert('INFO', 'Pas de commentaires.', 'alert-info');
+                }
                 for (comments in data.comments) {
                     var date = app.tools.dateTime(data.comments[comments].date);
                     app.news.comments._create(
