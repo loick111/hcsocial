@@ -32,6 +32,7 @@ app.news.load = function () {
                     date.time,
                     data[news].message
                 );
+                app.news.comments.load(data[news].id);
             }
         },
         function () {
@@ -49,8 +50,6 @@ app.news.utils = function (newsId) {
 
     app.news.delete(newsId);
     app.news.like(newsId);
-    app.news.comments.addToggle(newsId);
-    app.news.comments.displayToggle(newsId);
 };
 
 /**

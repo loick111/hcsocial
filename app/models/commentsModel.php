@@ -37,35 +37,34 @@ SQL;
         return DatabaseProvider::connection()->execute($sql, $comments);
     }
 
-    public function get($username, $news)
+    public function get($id)
     {
         $sql = <<<SQL
 SELECT * FROM comments
-  WHERE username = :username
-  AND news = :news;
+  WHERE id = :id;
 SQL;
 
-        return DatabaseProvider::connection()->selectFirst($sql, ['username' => $username, 'news' => $news]);
+        return DatabaseProvider::connection()->selectFirst($sql, ['id' => $id]);
     }
 
     public function getAll($news)
     {
         $sql = <<<SQL
 SELECT * FROM comments
+  JOIN users ON users.username = comments.username
   WHERE news = :news;
 SQL;
 
         return DatabaseProvider::connection()->query($sql, ['news' => $news]);
     }
 
-    public function delete($username, $news)
+    public function delete($id)
     {
         $sql = <<<SQL
 DELETE FROM comments
-  WHERE username = :username
-  AND news = :news;
+  WHERE id = :id;
 SQL;
 
-        return DatabaseProvider::connection()->execute($sql, ['username' => $username, 'news' => $news]);
+        return DatabaseProvider::connection()->execute($sql, ['id' => $id]);
     }
 }

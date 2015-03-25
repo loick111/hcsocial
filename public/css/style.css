@@ -18,6 +18,18 @@ textarea {
     max-height: 200px;
 }
 
+.comments img.gravatar {
+    width: 40px;
+}
+
+.comments .media {
+    border-bottom: 1px solid lightgrey;
+}
+
+.comments .media:last-of-type {
+    border-bottom: 0;
+}
+
 .date {
     color: #888888;
 }

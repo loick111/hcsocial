@@ -69,7 +69,10 @@ app.tools.dateTime = function (timestamp) {
  */
 app.tools.loadGravatar = function () {
     $('.gravatar').each(function () {
-        $(this).attr('src', 'http://gravatar.com/avatar/' + CryptoJS.MD5($(this).attr('src')) + '?s=150');
+        if (!$(this).attr('loaded')) {
+            $(this).attr('src', 'http://gravatar.com/avatar/' + CryptoJS.MD5($(this).attr('src')) + '?s=150');
+            $(this).attr('loaded', true);
+        }
     });
 
     $('input[name="mail"]').change(function () {
