@@ -57,9 +57,7 @@ app.forms.addNews = function () {
         function (data) {
             if (data.success) {
                 $('#form-add-news')[0].reset();
-                var date = app.tools.dateTime(data.date);
                 // todo: reload news
-                app.news._create(data.id, true, data.username, data.mail, data.fullname, date.date, date.time, data.message);
                 app.tools.alert('Publié !', 'Votre message a été publié avec succès.', 'alert-success');
             }
         },
@@ -82,9 +80,7 @@ app.forms.addComments = function (newsId) {
         function(data) {
             if(data.success) {
                 elem[0].reset();
-                var date = app.tools.dateTime(data.date);
                 // todo: reload comments
-                app.news.comments._create(data.id, data.username, data.firstname, data.lastname, data.mail, date.date, date.time, data.comments);
                 app.tools.alert('Publié !', 'Votre commentaire a été publié avec succès.', 'alert-success');
             }
         },

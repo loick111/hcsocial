@@ -27,6 +27,12 @@ app.tools.ajaxForm = function (form, success, error) {
         });
         return false;
     });
+
+    form.find('textarea').keydown(function (e) {
+        if (e.ctrlKey && e.keyCode == 13) {
+            form.submit();
+        }
+    });
 };
 
 /**
