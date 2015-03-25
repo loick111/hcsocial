@@ -126,6 +126,7 @@ img.profile {
     top: -5px;
     float: left;
     left: -5px;
+    width: 30px;
 }
 
 @media (max-width: 767px) {
