@@ -16,7 +16,8 @@
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li {% if view and view == 'home' %}class="active"{% endif %}><a href="/"><span
-                                    class="glyphicon glyphicon-home"></span> Fil d'actualité</a></li>
+                                    class="glyphicon glyphicon-home"></span> Fil d'actualité<img
+                                    src="/public/img/loading.gif" alt="Chargement..." id="loading"></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/users/show/{{ auth.username }}"><img width="30" src="{{ auth.options.mail }}"

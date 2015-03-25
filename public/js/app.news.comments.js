@@ -22,7 +22,12 @@ app.news.comments.load = function (newsId) {
         function (data) {
             if (data.success) {
                 if (data.comments.length == 0) {
-                    app.tools.alert('INFO', 'Pas de commentaires.', 'alert-info');
+                    $('.news[data-news-id=' + newsId + ']')
+                        .find('.comments')
+                        .append(
+                        $('<p>')
+                            .html('Pas de commentaires.')
+                    )
                 }
                 for (comments in data.comments) {
                     var date = app.tools.dateTime(data.comments[comments].date);

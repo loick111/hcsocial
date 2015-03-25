@@ -16,29 +16,46 @@ app.news.load = function () {
     if (app.debug)
         console.log('app.news.load()');
 
+    app.tools.loading.show();
+
     app.tools.ajax(
         '/news/loadAll',
         function (data) {
             if (data.length == 0) {
-                app.tools.alert('INFO', 'Pas de publications.', 'alert-info');
-
+                if ($('#no-news').size() == 0) {
+                    $('#news').append(
+                        $('<div>')
+                            .attr('id', 'no-news')
+                            .addClass('col-lg-6 col-lg-offset-3')
+                            .append(
+                            $('<h2>')
+                                .addClass('centered')
+                                .html('Pas de publications.')
+                        )
+                    )
+                } else {
+                    $('#no-news').fadeIn();
+                }
             }
+
             for (news in data) {
-                var date = app.tools.dateTime(data[news].date);
-                app.news._create(
-                    data[news].id,
-                    data[news].admin,
-                    data[news].username,
-                    data[news].mail,
-                    data[news].firstname + ' ' + data[news].lastname,
-                    date.date,
-                    date.time,
-                    data[news].message
-                );
-                app.news.comments.load(data[news].id);
+                if ($('.news[data-news-id=' + data[news].id + ']').length == 0) {
+                    var date = app.tools.dateTime(data[news].date);
+                    app.news._create(
+                        data[news].id,
+                        data[news].admin,
+                        data[news].username,
+                        data[news].mail,
+                        data[news].firstname + ' ' + data[news].lastname,
+                        date.date,
+                        date.time,
+                        data[news].message
+                    );
+                    app.news.comments.load(data[news].id);
+                }
             }
 
-            $('#news-message').remove();
+            app.tools.loading.hide();
         },
         function () {
             app.tools.alert('Erreur !', 'Erreur lors du chargement des publications.', 'alert-danger');

@@ -34,7 +34,11 @@ textarea {
     color: #888888;
 }
 
-#loading h1 {
+#loading {
+    text-align: center;
+}
+
+#news h2 {
     text-align: center;
 }
 
@@ -48,11 +52,11 @@ img.profile {
     margin-right: 5px;
 }
 
-#news-message img {
+#loading img {
     width: 100px;
 }
 
-#news-message h1 {
+#loading h1 {
     text-align: center;
 }
 

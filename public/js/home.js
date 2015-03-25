@@ -19,5 +19,5 @@ $(document).ready(function() {
 
     //NEWS
     app.news.load();
-    //setInterval(app.news.load, 5000);
+    setInterval(app.news.load, 5000);
 });

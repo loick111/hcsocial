@@ -59,6 +59,7 @@ app.forms.addNews = function () {
                 $('#form-add-news')[0].reset();
                 // todo: reload news
                 app.tools.alert('Publié !', 'Votre message a été publié avec succès.', 'alert-success');
+                app.news.load();
             }
         },
         function () {
