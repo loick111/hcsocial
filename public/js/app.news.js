@@ -50,6 +50,7 @@ app.news.utils = function (newsId) {
 
     app.news.delete(newsId);
     app.news.like(newsId);
+    app.forms.addComments(newsId);
 };
 
 /**
@@ -281,20 +282,26 @@ app.news._create = function createNews(id, admin, username, mail, fullname, date
                         $('<span>')
                             .html('Afficher les commentaires')
                     )
-                ).append(
-                    $('<a>')
-                        .attr('class', 'comments-action')
-                        .append(
-                        $('<span>')
-                            .attr('class', 'glyphicon glyphicon-pencil')
-                    ).append(
-                        $('<span>')
-                            .html('Commenter')
-                    )
                 )
             ).append(
                 $('<div>')
                     .attr('class', 'panel-body comments')
+            ).append(
+                $('<div>')
+                    .attr('class', 'panel-footer')
+                    .append(
+                    $('<form>')
+                        .attr('method', 'post')
+                        .attr('action', '/comments/add/' + id)
+                        .addClass('form-add-comments')
+                        .append(
+                        $('<input>')
+                            .attr('type', 'text')
+                            .addClass('form-control')
+                            .attr('name', 'message')
+                            .attr('placeholder', 'Écrire un commentaire...')
+                    )
+                )
             )
         )
             .hide()

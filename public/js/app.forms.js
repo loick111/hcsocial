@@ -71,9 +71,11 @@ app.forms.addNews = function () {
 /**
  * Add comments Form
  */
-app.forms.addComments = function(elem) {
+app.forms.addComments = function (newsId) {
     if (app.debug)
         console.log('app.forms.addComments()');
+
+    var elem = $('.news[data-news-id=' + newsId + ']').find('form');
 
     app.tools.ajaxForm(
         elem,
