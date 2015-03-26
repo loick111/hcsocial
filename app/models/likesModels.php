@@ -41,7 +41,11 @@ SQL;
 INSERT INTO likes (username, news)
   VALUES (:username, :news);
 SQL;
-
+        $update = <<<SQL
+UPDATE news SET update = NOW()
+  WHERE id = :news;
+SQL;
+        DatabaseProvider::connection()->execute($update, ['news' => $news]);
         return DatabaseProvider::connection()->execute($sql, ['username' => $username, 'news' => $news]);
     }
 
@@ -52,7 +56,11 @@ DELETE FROM likes
   WHERE username = :username
   AND news = :news;
 SQL;
-
+        $update = <<<SQL
+UPDATE news SET update = NOW()
+  WHERE id = :news;
+SQL;
+        DatabaseProvider::connection()->execute($update, ['news' => $news]);
         return DatabaseProvider::connection()->execute($sql, ['username' => $username, 'news' => $news]);
     }
 }

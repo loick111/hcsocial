@@ -20,7 +20,11 @@ class commentsModel extends Model
 INSERT INTO comments (username, news, message)
   VALUES (:username, :news, :message);
 SQL;
-
+        $update = <<<SQL
+UPDATE news SET update = NOW()
+  WHERE id = :news;
+SQL;
+        DatabaseProvider::connection()->execute($update, ['news' => $comments['news']]);
         return DatabaseProvider::connection()->execute($sql, $comments);
     }
 

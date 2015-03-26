@@ -22,7 +22,11 @@ app.tools.ajaxForm = function (form, success, error) {
             type: $(this).attr("method"),
             url: $(this).attr("action"),
             data: data,
-            success: success,
+            success: function (data) {
+                if (data.display)
+                    app.tools.alert('Message', data.message, 'alert-info');
+                success(data);
+            },
             error: error
         });
         return false;

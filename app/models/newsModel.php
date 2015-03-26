@@ -41,8 +41,8 @@ SQL;
     public function add($news)
     {
         $sql = <<<SQL
-INSERT INTO news (username, date, message)
-  VALUES (:user, NOW(), :message);
+INSERT INTO news (username, date, update, message)
+  VALUES (:user, NOW(), NOW(), :message);
 SQL;
         DatabaseProvider::connection()->execute($sql, $news);
 

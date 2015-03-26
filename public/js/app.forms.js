@@ -19,8 +19,10 @@ app.forms.login = function () {
     app.tools.ajaxForm(
         $('#form-login'),
         function (data) {
-            if (data.success)
+            if (data.success) {
+                app.tools.alert('Connecté', 'Vous êtes maintenant connecté.', 'alert-success');
                 window.location = '/';
+            }
         },
         function () {
             app.tools.alert('Erreur !', 'Erreur lors de la connexion.', 'alert-danger');
@@ -37,8 +39,10 @@ app.forms.signin = function () {
     app.tools.ajaxForm(
         $('#form-signin'),
         function (data) {
-            if (data.success)
+            if (data.success) {
+                app.tools.alert('Inscrit', 'Vous êtes maintenant inscrit.', 'alert-success');
                 window.location = '/users/login';
+            }
         },
         function () {
             app.tools.alert('Erreur !', 'Erreur lors de l\'inscription.', 'alert-danger');
