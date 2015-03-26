@@ -61,7 +61,6 @@ app.forms.addNews = function () {
         function (data) {
             if (data.success) {
                 $('#form-add-news')[0].reset();
-                // todo: reload news
                 app.tools.alert('Publié !', 'Votre message a été publié avec succès.', 'alert-success');
                 app.news.load();
             }
@@ -85,7 +84,6 @@ app.forms.addComments = function (newsId) {
         function(data) {
             if(data.success) {
                 elem[0].reset();
-                // todo: reload comments
                 app.tools.alert('Publié !', 'Votre commentaire a été publié avec succès.', 'alert-success');
             }
         },

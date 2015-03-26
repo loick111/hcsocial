@@ -38,6 +38,7 @@ app.news.load = function () {
                 }
             }
 
+            // Oui c'est très moche et pas opti du tout, je vais modifier
             for (news in data) {
                 if (data[news].update > $('#news').attr('data-latest')) {
                     $('.news[data-news-id=' + data[news].id + ']').remove();
