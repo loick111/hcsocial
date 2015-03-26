@@ -21,7 +21,8 @@ INSERT INTO comments (username, news, message)
   VALUES (:username, :news, :message);
 SQL;
         $update = <<<SQL
-UPDATE news SET update = NOW()
+UPDATE news
+  SET `update`=DEFAULT
   WHERE id = :news;
 SQL;
         DatabaseProvider::connection()->execute($update, ['news' => $comments['news']]);

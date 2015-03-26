@@ -39,9 +39,13 @@ app.news.load = function () {
             }
 
             for (news in data) {
+                if (data[news].update > $('#news').attr('data-latest')) {
+                    $('.news[data-news-id=' + data[news].id + ']').remove();
+                }
                 if ($('.news[data-news-id=' + data[news].id + ']').length == 0) {
                     var date = app.tools.dateTime(data[news].date);
                     app.news._create(
+                        data[news].update,
                         data[news].id,
                         data[news].admin,
                         data[news].username,
@@ -128,7 +132,7 @@ app.news.like = function (newsId) {
                 }
             },
             error: function () {
-                app.tools.alert('Erreur !', 'Erreur lors du J\'aime.', 'alert-danger');
+                app.tools.alert('Erreur !', 'Erreur lors du J\'aime Pas.', 'alert-danger');
             }
         });
     };
@@ -161,7 +165,7 @@ app.news.like = function (newsId) {
                 }
             },
             error: function () {
-                app.tools.alert('Erreur !', 'Erreur lors du J\'aime pas.', 'alert-danger');
+                app.tools.alert('Erreur !', 'Erreur lors du J\'aime.', 'alert-danger');
             }
         });
     };
@@ -213,12 +217,12 @@ app.news.like = function (newsId) {
  * @param message
  * @private
  */
-app.news._create = function createNews(id, admin, username, mail, fullname, date, time, message) {
+app.news._create = function createNews(update, id, admin, username, mail, fullname, date, time, message) {
     if (app.debug)
         console.log('app.news._create()');
 
     $('#news')
-        .attr('data-news-latest', id)
+        .attr('data-latest', update)
         .prepend(
         $('<div>')
             .addClass('col-lg-6 col-lg-offset-3')

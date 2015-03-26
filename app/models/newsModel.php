@@ -17,11 +17,9 @@ class newsModel extends Model
     public function getAll()
     {
         $sql = <<<SQL
-(SELECT * FROM news
+SELECT * FROM news
   JOIN users ON news.username = users.username
-  ORDER BY date DESC
-  LIMIT 100)
-  ORDER BY date ASC;
+  ORDER BY `update` ASC;
 SQL;
 
         return DatabaseProvider::connection()->query($sql);
@@ -41,7 +39,7 @@ SQL;
     public function add($news)
     {
         $sql = <<<SQL
-INSERT INTO news (username, date, update, message)
+INSERT INTO news (username, date, `update`, message)
   VALUES (:user, NOW(), NOW(), :message);
 SQL;
         DatabaseProvider::connection()->execute($sql, $news);

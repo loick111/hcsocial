@@ -12,7 +12,7 @@ namespace app\models;
 use SFramework\Database\DatabaseProvider;
 use SFramework\mvc\Model;
 
-class likesModels extends Model
+class likesModel extends Model
 {
     public function get($username, $news)
     {
@@ -42,7 +42,8 @@ INSERT INTO likes (username, news)
   VALUES (:username, :news);
 SQL;
         $update = <<<SQL
-UPDATE news SET update = NOW()
+UPDATE news
+  SET `update`=DEFAULT
   WHERE id = :news;
 SQL;
         DatabaseProvider::connection()->execute($update, ['news' => $news]);
@@ -57,7 +58,8 @@ DELETE FROM likes
   AND news = :news;
 SQL;
         $update = <<<SQL
-UPDATE news SET update = NOW()
+UPDATE news
+  SET `update`=DEFAULT
   WHERE id = :news;
 SQL;
         DatabaseProvider::connection()->execute($update, ['news' => $news]);

@@ -9,7 +9,7 @@
 namespace app\controllers;
 
 
-use app\models\likesModels;
+use app\models\likesModel;
 use app\models\newsModel;
 use SFramework\Exceptions\NotAuthenticatedException;
 use SFramework\Helpers\Authentication;
@@ -79,6 +79,7 @@ class NewsController extends Controller
         foreach ($news as &$n) {
             $n['message'] = strip_tags(nl2br($n['message']), '<br>');
             $n['date'] = strtotime($n['date']);
+            $n['update'] = strtotime($n['update']);
 
             $n['admin'] = false;
             if ($n['username'] == Authentication::getInstance()->getUserName()) {
@@ -130,7 +131,7 @@ class NewsController extends Controller
         $username = Authentication::getInstance()->getUserName();
 
         $modelNews = new newsModel();
-        $modelLikes = new likesModels();
+        $modelLikes = new likesModel();
 
         $res = [
             'success' => false,
@@ -167,7 +168,7 @@ class NewsController extends Controller
         $username = Authentication::getInstance()->getUserName();
 
         $modelNews = new newsModel();
-        $modelLikes = new likesModels();
+        $modelLikes = new likesModel();
 
         $res = [
             'success' => false,
@@ -200,7 +201,7 @@ class NewsController extends Controller
         $username = Authentication::getInstance()->getUserName();
 
         $modelNews = new newsModel();
-        $modelLikes = new likesModels();
+        $modelLikes = new likesModel();
 
         $res = [
             'success' => false,
