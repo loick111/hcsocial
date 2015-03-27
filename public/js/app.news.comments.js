@@ -44,50 +44,14 @@ app.news.comments.load = function (newsId) {
                     );
                 }
 
-                app.news.comments.addToggle(newsId);
                 app.news.comments.displayToggle(newsId);
+                app.news.load();
             }
         },
         function () {
             app.tools.alert('Erreur !', 'Erreur lors du chargement des commentaires.', 'alert-danger');
         }
     );
-};
-
-
-/**
- * Comments add input on news
- */
-app.news.comments.addToggle = function (newsId) {
-    if (app.debug)
-        console.log('app.news.comments.addToggle()');
-
-    var elem = $('.news[data-news-id=' + newsId + ']');
-
-    elem.find('.comments-action').click(function () {
-        $(this)
-            .parent()
-            .parent()
-            .append(
-            $('<div>')
-                .attr('class', 'panel-footer')
-                .append(
-                $('<form>')
-                    .attr('method', 'post')
-                    .attr('action', '/comments/add/' + newsId)
-                    .addClass('form-add-comments')
-                    .append(
-                    $('<input>')
-                        .attr('type', 'text')
-                        .addClass('form-control')
-                        .attr('name', 'message')
-                        .attr('placeholder', 'Écrire un commentaire...')
-                )
-            )
-        );
-        app.forms.addComments($(this).parent().parent().find('form'));
-        $(this).remove();
-    });
 };
 
 /**

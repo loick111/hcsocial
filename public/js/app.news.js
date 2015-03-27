@@ -36,6 +36,8 @@ app.news.load = function () {
                 } else {
                     $('#no-news').fadeIn();
                 }
+            } else {
+                $('#no-news').fadeOut();
             }
 
             // Oui c'est très moche et pas opti du tout, je vais modifier
@@ -78,6 +80,7 @@ app.news.utils = function (newsId) {
     app.news.delete(newsId);
     app.news.like(newsId);
     app.forms.addComments(newsId);
+    app.news.load();
 };
 
 /**
@@ -109,7 +112,9 @@ app.news.delete = function (newsId) {
                 }
             });
         }
-    })
+        });
+
+    app.news.load();
 };
 
 /**
@@ -204,6 +209,8 @@ app.news.like = function (newsId) {
             }
         );
     });
+
+    app.news.load();
 };
 
 /**
