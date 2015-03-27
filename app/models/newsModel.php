@@ -17,7 +17,7 @@ class newsModel extends Model
     public function getAll()
     {
         $sql = <<<SQL
-SELECT * FROM news
+SELECT news.*, users.username, users.firstname, users.lastname, users.mail FROM news
   JOIN users ON news.username = users.username
   ORDER BY `update` ASC;
 SQL;

@@ -55,7 +55,7 @@ SQL;
     public function getAll($news)
     {
         $sql = <<<SQL
-SELECT * FROM comments
+SELECT comments.*, users.username, users.firstname, users.lastname, users.mail FROM comments
   JOIN users ON users.username = comments.username
   WHERE news = :news;
 SQL;
