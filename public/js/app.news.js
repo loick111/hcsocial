@@ -81,6 +81,13 @@ app.news.utils = function (newsId) {
     app.news.like(newsId);
     app.forms.addComments(newsId);
     app.news.load();
+
+    $('.news[data-news-id=' + newsId + '] p').click(function() {
+        if($(this).css('-webkit-line-clamp') == 5)
+            $(this).css('-webkit-line-clamp', '100');
+        else
+            $(this).css('-webkit-line-clamp', '5');
+    });
 };
 
 /**
