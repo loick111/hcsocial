@@ -23,19 +23,20 @@ app.news.load = function () {
         '/news/loadAll/' + latest,
         function (data) {
             if (data.length == 0) {
-                //if ($('#no-news').size() == 0) {
-                //    $('#news').append(
-                //        $('<div>')
-                //            .attr('id', 'no-news')
-                //            .addClass('col-lg-6 col-lg-offset-3')
-                //            .append(
-                //            $('<h2>')
-                //                .addClass('centered')
-                //                .html('Pas de publications.')
-                //        )
-                //    )
-                //} else {
-                //}
+                if ($('#no-news').size() == 0) {
+                    $('#news').append(
+                        $('<div>')
+                            .attr('id', 'no-news')
+                            .addClass('col-lg-6 col-lg-offset-3')
+                            .append(
+                            $('<h2>')
+                                .addClass('centered')
+                                .html('Pas de publications.')
+                        )
+                    )
+                } else {
+                    $('#no-news').fadeIn();
+                }
             } else {
                 $('#no-news').fadeOut();
 
@@ -114,8 +115,6 @@ app.news.delete = function (newsId) {
             });
         }
         });
-
-    app.news.load();
 };
 
 /**
@@ -210,8 +209,6 @@ app.news.like = function (newsId) {
             }
         );
     });
-
-    app.news.load();
 };
 
 /**
