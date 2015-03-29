@@ -125,7 +125,7 @@ app.tools.requiredInput = function () {
 
 /**
  * Add alert
- * Available type = [danger, warning, info, success]
+ * Available type = [alert-danger, alert-info, alert-success]
  */
 app.tools.alert = function (title, message, type) {
     $('#alert').find('h4').html(title);
@@ -139,6 +139,13 @@ app.tools.alert = function (title, message, type) {
 
     $('#alert').fadeIn();
     $('#alert').delay(2000).fadeOut();
+};
+
+/**
+ * More in news
+ */
+app.tools.more = function () {
+
 };
 
 /**

@@ -77,12 +77,26 @@ app.news.utils = function (newsId) {
     app.news.like(newsId);
     app.forms.addComments(newsId);
 
-    $('.news[data-news-id=' + newsId + '] p').click(function() {
-        if($(this).css('-webkit-line-clamp') == 5)
-            $(this).css('-webkit-line-clamp', '100');
-        else
-            $(this).css('-webkit-line-clamp', '5');
-    });
+    var news = $('.news[data-news-id=' + newsId + ']');
+
+    if (news.find('.content p').height() > 200) {
+        news.find('.content')
+            .append(
+            $('<a>')
+                .html('Afficher la suite')
+                .click(function () {
+                    if ($(this).html() == 'Afficher la suite') {
+                        $(this).html('Réduire');
+                        news.find('.content p').css('max-height', '');
+                    }
+                    else {
+                        $(this).html('Afficher la suite');
+                        news.find('.content p').css('max-height', '7em');
+                    }
+                })
+        );
+        news.find('.content p').css('max-height', '7em');
+    }
 };
 
 /**
@@ -280,7 +294,7 @@ app.news._create = function createNews(update, id, admin, username, mail, fullna
                 )
             ).append(
                 $('<div>')
-                    .attr('class', 'panel-body')
+                    .attr('class', 'panel-body content')
                     .append(
                     $('<p>')
                         .html(message)
