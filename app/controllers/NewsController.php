@@ -74,7 +74,10 @@ class NewsController extends Controller
 
         $this->getView()->ajax();
         $model = new newsModel();
-        $news = $model->getAll();
+        $param = $this->getParams()[0];
+        $latest = (int)$param;
+
+        $news = $model->getAll($latest);
 
         foreach ($news as &$n) {
             $n['message'] = strip_tags(nl2br($n['message']), '<br>');

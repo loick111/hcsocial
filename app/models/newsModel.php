@@ -14,15 +14,16 @@ use SFramework\mvc\Model;
 
 class newsModel extends Model
 {
-    public function getAll()
+    public function getAll($latest)
     {
         $sql = <<<SQL
 SELECT news.*, users.username, users.firstname, users.lastname, users.mail FROM news
   JOIN users ON news.username = users.username
+  WHERE news.update > FROM_UNIXTIME(:latest)
   ORDER BY `update` ASC;
 SQL;
 
-        return DatabaseProvider::connection()->query($sql);
+        return DatabaseProvider::connection()->query($sql, ['latest' => $latest]);
     }
 
     public function get($id)

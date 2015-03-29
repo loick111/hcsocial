@@ -45,7 +45,6 @@ app.news.comments.load = function (newsId) {
                 }
 
                 app.news.comments.displayToggle(newsId);
-                app.news.load();
             }
         },
         function () {

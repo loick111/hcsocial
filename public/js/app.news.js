@@ -17,35 +17,30 @@ app.news.load = function () {
         console.log('app.news.load()');
 
     app.tools.loading.show();
+    var latest = $('#news').attr('data-latest');
 
     app.tools.ajax(
-        '/news/loadAll',
+        '/news/loadAll/' + latest,
         function (data) {
             if (data.length == 0) {
-                if ($('#no-news').size() == 0) {
-                    $('#news').append(
-                        $('<div>')
-                            .attr('id', 'no-news')
-                            .addClass('col-lg-6 col-lg-offset-3')
-                            .append(
-                            $('<h2>')
-                                .addClass('centered')
-                                .html('Pas de publications.')
-                        )
-                    )
-                } else {
-                    $('#no-news').fadeIn();
-                }
+                //if ($('#no-news').size() == 0) {
+                //    $('#news').append(
+                //        $('<div>')
+                //            .attr('id', 'no-news')
+                //            .addClass('col-lg-6 col-lg-offset-3')
+                //            .append(
+                //            $('<h2>')
+                //                .addClass('centered')
+                //                .html('Pas de publications.')
+                //        )
+                //    )
+                //} else {
+                //}
             } else {
                 $('#no-news').fadeOut();
-            }
 
-            // Oui c'est très moche et pas opti du tout, je vais modifier
-            for (news in data) {
-                if (data[news].update > $('#news').attr('data-latest')) {
+                for (news in data) {
                     $('.news[data-news-id=' + data[news].id + ']').remove();
-                }
-                if ($('.news[data-news-id=' + data[news].id + ']').length == 0) {
                     var date = app.tools.dateTime(data[news].date);
                     app.news._create(
                         data[news].update,
@@ -80,7 +75,6 @@ app.news.utils = function (newsId) {
     app.news.delete(newsId);
     app.news.like(newsId);
     app.forms.addComments(newsId);
-    app.news.load();
 
     $('.news[data-news-id=' + newsId + '] p').click(function() {
         if($(this).css('-webkit-line-clamp') == 5)
@@ -236,8 +230,10 @@ app.news._create = function createNews(update, id, admin, username, mail, fullna
     if (app.debug)
         console.log('app.news._create()');
 
+    if ($('#news').attr('data-latest') < update)
+        $('#news').attr('data-latest', update);
+
     $('#news')
-        .attr('data-latest', update)
         .prepend(
         $('<div>')
             .addClass('col-lg-6 col-lg-offset-3')
