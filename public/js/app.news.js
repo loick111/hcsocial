@@ -33,7 +33,8 @@ app.news.load = function () {
                                 .addClass('centered')
                                 .html('Pas de publications.')
                         )
-                    )
+                    );
+                    $('#no-news').fadeOut();
                 } else {
                     $('#no-news').fadeIn();
                 }

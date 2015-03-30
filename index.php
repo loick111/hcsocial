@@ -36,6 +36,7 @@ function main()
     $classRouting->addClass('Users');
     $classRouting->addClass('News');
     $classRouting->addClass('Comments');
+    $classRouting->addClass('Mobile');
 
     $classRouting->generateRoute($router);
 
