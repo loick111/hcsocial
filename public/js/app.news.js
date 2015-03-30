@@ -22,8 +22,9 @@ app.news.load = function () {
     app.tools.ajax(
         '/news/loadAll/' + latest,
         function (data) {
+            console.log(data);
             if (data.length == 0) {
-                if ($('#no-news').size() == 0) {
+                if ($('#no-news').length == 0) {
                     $('#news').append(
                         $('<div>')
                             .attr('id', 'no-news')
@@ -34,9 +35,6 @@ app.news.load = function () {
                                 .html('Pas de publications.')
                         )
                     );
-                    $('#no-news').fadeOut();
-                } else {
-                    $('#no-news').fadeIn();
                 }
             } else {
                 $('#no-news').fadeOut();
@@ -58,13 +56,13 @@ app.news.load = function () {
                     app.news.comments.load(data[news].id);
                 }
             }
-
-            app.tools.loading.hide();
         },
         function () {
             app.tools.alert('Erreur !', 'Erreur lors du chargement des publications.', 'alert-danger');
         }
     );
+
+    app.tools.loading.hide();
 };
 
 /**
