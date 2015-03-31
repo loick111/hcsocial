@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>#HCSocial</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/public/img/hcsocial.png"/>
+    <!--[if IE]>
+    <link rel="shortcut icon" type="image/x-icon" href="/public/img/hcsocial.ico"/>
+    <![endif]-->
+    <title>#HCSocial</title>
+
     {{ helpers.assets.js('jquery-2.1.3.min') }}
     {{ helpers.assets.js('jquery.mobile-1.4.5.min') }}
     {{ helpers.assets.css('jquery.mobile-1.4.5.min') }}
@@ -16,7 +22,26 @@
     </div>
 
     <div role="main" class="ui-content">
-        <p>Page content goes here.</p>
+        <div id="news">
+            <div class="news">
+                <div class="ui-bar ui-bar-a">
+                    <p>Loïck MAHIEUX</p>
+                </div>
+                <div class="ui-body ui-body-a">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam hendrerit velit at elit
+                        interdum, eget sagittis est pretium. In facilisis, sapien id venenatis viverra, tortor orci
+                        posuere
+                        mauris, at dignissim urna ex at sapien. Vestibulum ullamcorper aliquet pharetra. Praesent
+                        sollicitudin vitae libero vel ornare. In porta eleifend urna, ut mattis dui sodales eleifend.
+                        Morbi
+                        vestibulum et purus ut placerat. Integer sollicitudin ac ex nec tempus. Sed dui arcu, pharetra
+                        ut
+                        egestas vitae, fermentum a massa. Praesent mattis, nisi ac pulvinar vestibulum, mi nunc rutrum
+                        nisi,
+                        vel consectetur enim est et mi.</p>  
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

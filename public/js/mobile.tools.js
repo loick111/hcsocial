@@ -140,23 +140,3 @@ app.tools.alert = function (title, message, type) {
     $('#alert').fadeIn();
     $('#alert').delay(2000).fadeOut();
 };
-
-/**
- * LOADING
- * @type {{}}
- */
-app.tools.loading = {};
-
-/**
- * Show loading
- */
-app.tools.loading.show = function () {
-    $('#loading').fadeIn();
-};
-
-/**
- * Hide loading
- */
-app.tools.loading.hide = function () {
-    $('#loading').fadeOut();
-};
