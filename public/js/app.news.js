@@ -24,18 +24,18 @@ app.news.load = function () {
         function (data) {
             console.log(data);
             if (data.length == 0) {
-                if ($('#no-news').length == 0) {
-                    $('#news').append(
-                        $('<div>')
-                            .attr('id', 'no-news')
-                            .addClass('col-lg-6 col-lg-offset-3')
-                            .append(
-                            $('<h2>')
-                                .addClass('centered')
-                                .html('Pas de publications.')
-                        )
-                    );
-                }
+                //if ($('#no-news').length == 0) {
+                //    $('#news').append(
+                //        $('<div>')
+                //            .attr('id', 'no-news')
+                //            .addClass('col-lg-6 col-lg-offset-3')
+                //            .append(
+                //            $('<h2>')
+                //                .addClass('centered')
+                //                .html('Pas de publications.')
+                //        )
+                //    );
+                //}
             } else {
                 $('#no-news').fadeOut();
 
