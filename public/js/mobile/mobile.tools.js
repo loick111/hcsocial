@@ -7,7 +7,7 @@
  * TOOLS
  * @type {{}}
  */
-app.tools = {};
+mobile.tools = {};
 
 /**
  * Ajax call from Form
@@ -15,7 +15,7 @@ app.tools = {};
  * @param success
  * @param error
  */
-app.tools.ajaxForm = function (form, success, error) {
+mobile.tools.ajaxForm = function (form, success, error) {
     form.submit(function () {
         var data = $(this).serialize();
         $.ajax({
@@ -24,7 +24,7 @@ app.tools.ajaxForm = function (form, success, error) {
             data: data,
             success: function (data) {
                 if (data.display)
-                    app.tools.alert('Message', data.message, 'alert-info');
+                    mobile.tools.alert('Message', data.message, 'alert-info');
                 success(data);
             },
             error: error
@@ -45,7 +45,7 @@ app.tools.ajaxForm = function (form, success, error) {
  * @param success
  * @param error
  */
-app.tools.ajax = function (url, success, error) {
+mobile.tools.ajax = function (url, success, error) {
     $.ajax({
         url: url,
         success: function (data) {
@@ -62,7 +62,7 @@ app.tools.ajax = function (url, success, error) {
  * @param timestamp
  * @returns {{}}
  */
-app.tools.dateTime = function (timestamp) {
+mobile.tools.dateTime = function (timestamp) {
     if (!timestamp)
         timestamp = 'now';
 
@@ -77,7 +77,7 @@ app.tools.dateTime = function (timestamp) {
 /**
  * Load all pictures from Gravatar with class 'gravatar'
  */
-app.tools.loadGravatar = function () {
+mobile.tools.loadGravatar = function () {
     $('.gravatar').each(function () {
         if (!$(this).attr('loaded')) {
             $(this).attr('src', 'http://gravatar.com/avatar/' + CryptoJS.MD5($(this).attr('src')) + '?s=150');
@@ -94,7 +94,7 @@ app.tools.loadGravatar = function () {
 /**
  * Show if input is correct or not
  */
-app.tools.requiredInput = function () {
+mobile.tools.requiredInput = function () {
     $('input[required]').focusout(function () {
         if ($(this).parent().find('span').length == 1)
             $(this).parent()
@@ -127,7 +127,7 @@ app.tools.requiredInput = function () {
  * Add alert
  * Available type = [alert-danger, alert-info, alert-success]
  */
-app.tools.alert = function (title, message, type) {
+mobile.tools.alert = function (title, message, type) {
     $('#alert').find('h4').html(title);
     $('#alert').find('p').html(message);
     $('#alert')

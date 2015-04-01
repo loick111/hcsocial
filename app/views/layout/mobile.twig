@@ -11,41 +11,33 @@
 
     {{ helpers.assets.js('jquery-2.1.3.min') }}
     {{ helpers.assets.js('jquery.mobile-1.4.5.min') }}
+
     {{ helpers.assets.css('jquery.mobile-1.4.5.min') }}
     {{ helpers.assets.css('mobile') }}
 </head>
 
 <body>
+
+<div data-role="panel" data-display="reveal" id="panel" ui-panel-open>
+    <p>YOLO</p>
+</div>
+
 <div data-role="page">
     <div data-role="header">
         <h1>#HCSocial</h1>
     </div>
 
     <div role="main" class="ui-content">
-        <div id="news">
-            <div class="news">
-                <div class="ui-bar ui-bar-a">
-                    <p>Loïck MAHIEUX</p>
-                </div>
-                <div class="ui-body ui-body-a">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam hendrerit velit at elit
-                        interdum, eget sagittis est pretium. In facilisis, sapien id venenatis viverra, tortor orci
-                        posuere
-                        mauris, at dignissim urna ex at sapien. Vestibulum ullamcorper aliquet pharetra. Praesent
-                        sollicitudin vitae libero vel ornare. In porta eleifend urna, ut mattis dui sodales eleifend.
-                        Morbi
-                        vestibulum et purus ut placerat. Integer sollicitudin ac ex nec tempus. Sed dui arcu, pharetra
-                        ut
-                        egestas vitae, fermentum a massa. Praesent mattis, nisi ac pulvinar vestibulum, mi nunc rutrum
-                        nisi,
-                        vel consectetur enim est et mi.</p>  
-                </div>
-            </div>
-        </div>
+        {% block content %}
+        {% endblock %}
     </div>
 </div>
 
-{% block content %}
+{{ helpers.assets.js('mobile/mobile') }}
+{{ helpers.assets.js('mobile/mobile.tools') }}
+{{ helpers.assets.js('mobile/mobile.news') }}
+
+{% block js %}
 {% endblock %}
 
 </body>

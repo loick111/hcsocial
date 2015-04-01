@@ -28,14 +28,14 @@
 {{ helpers.assets.js('jquery-2.1.3.min') }}
 {{ helpers.assets.js('cryptojs.md5') }}
 {{ helpers.assets.js('bootstrap.min') }}
-{{ helpers.assets.js('app') }}
-{{ helpers.assets.js('app.tools') }}
-{{ helpers.assets.js('app.forms') }}
-{{ helpers.assets.js('app.news') }}
-{{ helpers.assets.js('app.news.comments') }}
+{{ helpers.assets.js('app/app') }}
+{{ helpers.assets.js('app/app.tools') }}
+{{ helpers.assets.js('app/app.forms') }}
+{{ helpers.assets.js('app/app.news') }}
+{{ helpers.assets.js('app/app.news.comments') }}
 
 {% block js %}
-    {{ helpers.assets.js('guest') }}
+    {{ helpers.assets.js('app/guest') }}
 {% endblock %}
 
 </body>

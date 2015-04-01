@@ -16,7 +16,6 @@ mobile.news.load = function () {
     if (mobile.debug)
         console.log('mobile.news.load()');
 
-    mobile.tools.loading.show();
     var latest = $('#news').attr('data-latest');
 
     mobile.tools.ajax(
@@ -45,8 +44,6 @@ mobile.news.load = function () {
             mobile.tools.alert('Erreur !', 'Erreur lors du chargement des publications.', 'alert-danger');
         }
     );
-
-    mobile.tools.loading.hide();
 };
 
 /**
@@ -72,16 +69,27 @@ mobile.news._create = function createNews(update, id, admin, username, mail, ful
         .prepend(
         $('<div>')
             .addClass('news')
+            .attr('data-news-id', id)
             .append(
             $('<div>')
                 .addClass('ui-bar')
                 .addClass('ui-bar-a')
-                .html(fullname)
+                .append(
+                $('<span>')
+                    .html(fullname)
+            ).append(
+                $('<span>')
+                    .html(', le ' + date + ' à ' + time)
+            )
         ).append(
             $('<div>')
                 .addClass('ui-body')
                 .addClass('ui-body-a')
-                .html(message)
+                .append(
+                $('<p>')
+                    .addClass('content')
+                    .html(message)
+            )
         )
     )
 };

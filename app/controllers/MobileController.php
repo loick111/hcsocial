@@ -19,4 +19,44 @@ class MobileController extends Controller
         }
         $this->getView()->render('/mobile/index');
     }
+
+    public function login()
+    {
+        if (Authentication::getInstance()->isAuthenticated()) {
+            $this->getView()->redirect('/mobile/index');
+        }
+        $this->getView()->render('/mobile/login');
+    }
+
+    public function signin()
+    {
+        if (Authentication::getInstance()->isAuthenticated()) {
+            $this->getView()->redirect('/mobile/index');
+        }
+        $this->getView()->render('/mobile/signin');
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        $this->getView()->render('/mobile/login');
+    }
+
+    public function show()
+    {
+        if (!Authentication::getInstance()->isAuthenticated()) {
+            $this->getView()->redirect('/mobile/login');
+        }
+
+        $username = $this->getParams()[0];
+        $model = new usersModel();
+
+        $vars = [
+            'user' => $model->getByUsername($username)
+        ];
+
+        $this->getView()->render('users/show', $vars);
+    }
+
+
 }

@@ -18,3 +18,17 @@
       -webkit-border-bottom-right-radius: inherit;
       border-bottom-right-radius: inherit;
 }
+
+.login-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.news .content {
+    text-align: justify;
+    word-wrap: break-word;
+    overflow: hidden;
+    line-height: 1em;
+    max-height: 5em;
+}

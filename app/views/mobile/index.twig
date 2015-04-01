@@ -1,5 +1,21 @@
 {% extends 'layout/mobile' %}
 
 {% block content %}
+    <div>
+        <div class="ui-bar ui-bar-a">
+            <span>Exprimez-vous</span>
+        </div>
+        <div class="ui-body ui-body-a">
+            <textarea cols="40" rows="8" name="textarea" id="textarea" placeholder="Votre message..."></textarea>
+            <button>Publier</button>
+        </div>
+    </div>
 
+    <div id="news" data-latest="0">
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ helpers.assets.js('mobile/home') }}
 {% endblock %}
