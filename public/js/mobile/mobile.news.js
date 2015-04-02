@@ -75,21 +75,50 @@ mobile.news._create = function createNews(update, id, admin, username, mail, ful
                 .addClass('ui-bar')
                 .addClass('ui-bar-a')
                 .append(
-                $('<span>')
-                    .html(fullname)
-            ).append(
-                $('<span>')
-                    .html(', le ' + date + ' à ' + time)
+                $('<div>')
+                    .addClass('ui-grid-a')
+                    .append(
+                    $('<div>')
+                        .addClass('ui-block-a')
+                        .addClass('profile')
+                        .append(
+                        $('<img>')
+                            .addClass('gravatar')
+                            .attr('src', mail)
+                    )
+                ).append(
+                    $('<div>')
+                        .addClass('ui-block-b')
+                        .append(
+                        $('<span>')
+                            .html(fullname)
+                    ).append(
+                        $('<span>')
+                            .addClass('date')
+                            .html('le ' + date + ' à ' + time)
+                    )
+                )
             )
         ).append(
             $('<div>')
                 .addClass('ui-body')
                 .addClass('ui-body-a')
+                .addClass('links')
                 .append(
                 $('<p>')
                     .addClass('content')
                     .html(message)
+            ).append(
+                $('<a>')
+                    .addClass('like-news')
+                    .html('J\'aime')
+            ).append(
+                $('<a>')
+                    .addClass('comments-display')
+                    .html('Afficher les commentaires')
             )
         )
-    )
+    );
+
+    mobile.tools.loadGravatar();
 };

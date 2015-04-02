@@ -1,3 +1,12 @@
+/**
+ * #HCSocial
+* @author Loïck Mahieux
+*/
+
+.ui-page {
+    background: #e9eaed;
+}
+
 .ui-header.ui-bar-inherit {
     background-color: #3c7de7;
     border-color: #06A0FF;
@@ -31,4 +40,39 @@
     overflow: hidden;
     line-height: 1em;
     max-height: 5em;
+}
+
+#news {
+    padding-top: 5px;
+}
+
+#news div.news {
+    padding-bottom: 5px;
+}
+
+.date {
+    display: block;
+    color: #888888;
+}
+
+.profile {
+    max-width: 60px;
+}
+
+img.gravatar {
+    width: 50px;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+}
+
+/*Fuck JQuery Mobile*/
+a.btn-swag {
+    background: #3c7de7 !important;
+    border: 1px solid #06A0FF !important;
+    color: #ffffff !important;
+}
+
+.links a {
+    padding-right: 10px;
 }
