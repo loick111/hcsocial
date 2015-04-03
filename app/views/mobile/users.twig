@@ -1,5 +1,12 @@
 {% extends 'layout/mobile' %}
 
+{% block header %}
+    <h1>#HCSocial</h1>
+    <a id="logout">Logout</a>
+{% endblock %}
+
 {% block content %}
 
+{% block js %}
+    {{ helpers.assets.js('mobile/show') }}
 {% endblock %}

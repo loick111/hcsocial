@@ -236,6 +236,10 @@ mobile.news._create = function createNews(update, id, admin, username, mail, ful
                         .addClass('like-count')
                         .html('0')
                 ).append(
+                    $('<img>')
+                        .addClass('like')
+                        .attr('src', '/public/img/like.png')
+                ).append(
                     $('<span>')
                         .addClass('like-text')
                         .html('J\'aime')

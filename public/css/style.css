@@ -158,3 +158,8 @@ img.profile {
         background-color: #06A0FF;
     }
 }
+
+#footer {
+    text-align: center;
+    min-height: 30px;
+}

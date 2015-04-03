@@ -23,7 +23,7 @@ class MobileController extends Controller
     public function login()
     {
         if (Authentication::getInstance()->isAuthenticated()) {
-            $this->getView()->redirect('/mobile/index');
+            $this->getView()->redirect('/mobile');
         }
         $this->getView()->render('/mobile/login');
     }
@@ -31,7 +31,7 @@ class MobileController extends Controller
     public function signin()
     {
         if (Authentication::getInstance()->isAuthenticated()) {
-            $this->getView()->redirect('/mobile/index');
+            $this->getView()->redirect('/mobile');
         }
         $this->getView()->render('/mobile/signin');
     }
@@ -39,7 +39,7 @@ class MobileController extends Controller
     public function logout()
     {
         session_destroy();
-        $this->getView()->render('/mobile/login');
+        $this->getView()->redirect('/mobile/login');
     }
 
     public function show()

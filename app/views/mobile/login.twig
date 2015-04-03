@@ -1,10 +1,18 @@
 {% extends 'layout/mobile' %}
 
+{% block header %}
+    <h1>#HCSocial</h1>
+{% endblock %}
+
 {% block content %}
-    <form method="post" action="/users/login">
+    <form method="post" action="/users/login" id="form-login">
         <img src="/public/img/hcsocial.png" class="login-img">
         <input type="text" name="username" placeholder="Nom d'utilisateur">
         <input type="password" name="password" placeholder="Mot de passe">
         <button type="submit">Connexion</button>
     </form>
+{% endblock %}
+
+{% block js %}
+    {{ helpers.assets.js('mobile/guest') }}
 {% endblock %}

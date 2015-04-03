@@ -1,13 +1,20 @@
 {% extends 'layout/mobile' %}
 
+{% block header %}
+    <h1>#HCSocial</h1>
+    <a id="logout">Logout</a>
+{% endblock %}
+
 {% block content %}
     <div>
         <div class="ui-bar ui-bar-a">
             <span>Exprimez-vous</span>
         </div>
         <div class="ui-body ui-body-a">
-            <textarea cols="40" rows="8" name="textarea" id="textarea" placeholder="Votre message..."></textarea>
-            <a data-role="button" class="btn-swag">Publier</a>
+            <form method="post" action="/news/add" id="form-add-news">
+                <textarea cols="40" rows="8" name="message" placeholder="Votre message..."></textarea>
+                <button data-role="button" type="submit" class="btn-swag">Publier</button>
+            </form>
         </div>
     </div>
 
