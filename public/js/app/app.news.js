@@ -148,6 +148,7 @@ app.news.like = function (newsId) {
 
                 if (data.success) {
                     _unlikeProcess(data);
+                    app.news.load();
                 }
             },
             error: function () {
@@ -181,6 +182,7 @@ app.news.like = function (newsId) {
 
                 if (data.success) {
                     _likeProcess(data);
+                    app.news.load();
                 }
             },
             error: function () {

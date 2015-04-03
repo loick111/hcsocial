@@ -90,6 +90,7 @@ mobile.news.like = function (newsId) {
 
                 if (data.success) {
                     _unlikeProcess(data);
+                    mobile.news.load();
                 }
             },
             error: function () {
@@ -123,6 +124,7 @@ mobile.news.like = function (newsId) {
 
                 if (data.success) {
                     _likeProcess(data);
+                    mobile.news.load();
                 }
             },
             error: function () {

@@ -85,6 +85,7 @@ app.forms.addComments = function (newsId) {
             if(data.success) {
                 elem[0].reset();
                 app.tools.alert('Publié !', 'Votre commentaire a été publié avec succès.', 'alert-success');
+                app.news.load();
             }
         },
         function() {

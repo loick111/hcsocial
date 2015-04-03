@@ -85,6 +85,7 @@ mobile.forms.addComments = function (newsId) {
             if(data.success) {
                 elem[0].reset();
                 mobile.tools.alert('Publié !', 'Votre commentaire a été publié avec succès.', 'alert-success');
+                mobile.news.load();
             }
         },
         function() {
