@@ -37,13 +37,133 @@ mobile.news.load = function () {
                     date.time,
                     data[news].message
                 );
+
                 //mobile.news.comments.load(data[news].id);
+                mobile.news.hide(data[news].id);
+                mobile.news.like(data[news].id);
             }
         },
         function () {
             mobile.tools.alert('Erreur !', 'Erreur lors du chargement des publications.', 'alert-danger');
         }
     );
+};
+
+mobile.news.hide = function (newsId) {
+    var news = $('.news[data-news-id=' + newsId + ']');
+    var content = news.find('.content');
+
+    if (content.height() > 200) {
+        content.parent().append(
+            $('<a>')
+                .html('Afficher la suite')
+                .click(function () {
+                    if ($(this).html() == 'Afficher la suite') {
+                        $(this).html('Réduire');
+                        content.css('max-height', '');
+                    }
+                    else {
+                        $(this).html('Afficher la suite');
+                        content.css('max-height', '5em');
+                    }
+                })
+        );
+        content.css('max-height', '5em');
+    }
+};
+
+/**
+ * Like news
+ */
+mobile.news.like = function (newsId) {
+    if (mobile.debug)
+        console.log('mobile.news.like()');
+
+    var elem = $('.news[data-news-id=' + newsId + ']');
+
+    var _unlikeAction = function () {
+        $.ajax({
+            url: '/news/unlike/' + elem.attr('data-news-id'),
+            success: function (data) {
+                if (data.display)
+                    alert(data.message);
+
+                if (data.success) {
+                    _unlikeProcess(data);
+                }
+            },
+            error: function () {
+                mobile.tools.alert('Erreur !', 'Erreur lors du J\'aime Pas.', 'alert-danger');
+            }
+        });
+    };
+
+    var _unlikeProcess = function (data) {
+        elem.find('.unlike-news')
+            .removeClass('unlike-news')
+            .addClass('like-news');
+
+        elem.find('.like-news')
+            .unbind()
+            .click(_likeAction);
+
+        elem.find('.like-count')
+            .html(data.count);
+
+        elem.find('.like-text')
+            .html('J\'aime');
+    };
+
+    var _likeAction = function () {
+        $.ajax({
+            url: '/news/like/' + elem.attr('data-news-id'),
+            success: function (data) {
+                if (data.display)
+                    alert(data.message);
+
+                if (data.success) {
+                    _likeProcess(data);
+                }
+            },
+            error: function () {
+                mobile.tools.alert('Erreur !', 'Erreur lors du J\'aime.', 'alert-danger');
+            }
+        });
+    };
+
+    var _likeProcess = function (data) {
+        elem.find('.like-news')
+            .removeClass('like-news')
+            .addClass('unlike-news');
+
+        elem.find('.unlike-news')
+            .unbind()
+            .click(_unlikeAction);
+
+        elem.find('.like-count')
+            .html(data.count);
+
+        elem.find('.like-text')
+            .html('Je n\'aime plus');
+    };
+
+    elem.each(function () {
+        mobile.tools.ajax(
+            '/news/countLike/' + $(this).attr('data-news-id'),
+            function (data) {
+                if (data.success) {
+                    if (data.liked) {
+                        _likeProcess(data);
+                    } else {
+                        _unlikeProcess(data);
+                    }
+                }
+            },
+            function () {
+                mobile.tools.alert('Erreur !', 'Erreur lors du chargement des "J\'aime."', 'alert-danger')
+            }
+        );
+    });
 };
 
 /**
@@ -103,17 +223,26 @@ mobile.news._create = function createNews(update, id, admin, username, mail, ful
             $('<div>')
                 .addClass('ui-body')
                 .addClass('ui-body-a')
-                .addClass('links')
                 .append(
                 $('<p>')
                     .addClass('content')
                     .html(message)
             ).append(
                 $('<a>')
+                    .addClass('link')
                     .addClass('like-news')
-                    .html('J\'aime')
+                    .append(
+                    $('<span>')
+                        .addClass('like-count')
+                        .html('0')
+                ).append(
+                    $('<span>')
+                        .addClass('like-text')
+                        .html('J\'aime')
+                )
             ).append(
                 $('<a>')
+                    .addClass('link')
                     .addClass('comments-display')
                     .html('Afficher les commentaires')
             )

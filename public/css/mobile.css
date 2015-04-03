@@ -39,7 +39,6 @@
     word-wrap: break-word;
     overflow: hidden;
     line-height: 1em;
-    max-height: 5em;
 }
 
 #news {
@@ -73,6 +72,10 @@ a.btn-swag {
     color: #ffffff !important;
 }
 
-.links a {
+.link {
     padding-right: 10px;
+}
+
+.like-count {
+    margin-right: 5px;
 }
