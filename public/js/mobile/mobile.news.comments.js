@@ -7,17 +7,17 @@
  * COMMENTS
  * @type {{}}
  */
-app.news.comments = {};
+mobile.news.comments = {};
 
 /**
  * Load comments on news
  * @param newsId
  */
-app.news.comments.load = function (newsId) {
-    if (app.debug)
-        console.log('app.news.comments.load()');
+mobile.news.comments.load = function (newsId) {
+    if (mobile.debug)
+        console.log('mobile.news.comments.load()');
 
-    app.tools.ajax(
+    mobile.tools.ajax(
         '/comments/load/' + newsId,
         function (data) {
             if (data.success) {
@@ -27,12 +27,12 @@ app.news.comments.load = function (newsId) {
                         .find('.comments')
                         .append(
                         $('<p>')
-                            .html('Pas de commentaires.')
+                            .html('Pas de commentaires...')
                     )
                 }
                 for (comments in data.comments) {
-                    var date = app.tools.dateTime(data.comments[comments].date);
-                    app.news.comments._create(
+                    var date = mobile.tools.dateTime(data.comments[comments].date);
+                    mobile.news.comments._create(
                         data.comments[comments].id,
                         data.comments[comments].news,
                         data.comments[comments].username,
@@ -45,11 +45,11 @@ app.news.comments.load = function (newsId) {
                     );
                 }
 
-                app.news.comments.displayToggle(newsId);
+                mobile.news.comments.displayToggle(newsId);
             }
         },
         function () {
-            app.tools.alert('Erreur !', 'Erreur lors du chargement des commentaires.', 'alert-danger');
+            mobile.tools.alert('Erreur !', 'Erreur lors du chargement des commentaires.', 'alert-danger');
         }
     );
 };
@@ -57,9 +57,9 @@ app.news.comments.load = function (newsId) {
 /**
  * Display comments on news
  */
-app.news.comments.displayToggle = function (newsId) {
-    if (app.debug)
-        console.log('app.news.comments.commentsDisplayToggle()');
+mobile.news.comments.displayToggle = function (newsId) {
+    if (mobile.debug)
+        console.log('mobile.news.comments.commentsDisplayToggle()');
 
     var elem = $('.news[data-news-id=' + newsId + ']');
 
@@ -89,25 +89,27 @@ app.news.comments.displayToggle = function (newsId) {
  * @param comment
  * @private
  */
-app.news.comments._create = function (id, news, username, firstname, lastname, mail, date, time, comment) {
-    if (app.debug)
-        console.log('app.news.comments._create()');
+mobile.news.comments._create = function (id, news, username, firstname, lastname, mail, date, time, comment) {
+    if (mobile.debug)
+        console.log('mobile.news.comments._create()');
 
     $('.news[data-news-id="' + news + '"]')
         .find('.comments')
         .append(
         $('<div>')
             .attr('data-comments-id', id)
-            .addClass('media')
+            .addClass('ui-grid')
+            .addClass('ui-grid-a')
+            .addClass('comment')
             .append(
             $('<div>')
-                .addClass('media-left')
+                .addClass('ui-block-a')
+                .addClass('profile')
                 .append(
                 $('<a>')
                     .attr('href', '/users/show/' + username)
                     .append(
                     $('<img>')
-                        .addClass('img-circle')
                         .addClass('gravatar')
                         .attr('alt', firstname + ' ' + lastname)
                         .attr('src', mail)
@@ -115,22 +117,22 @@ app.news.comments._create = function (id, news, username, firstname, lastname, m
             )
         ).append(
             $('<div>')
-                .addClass('media-body')
+                .addClass('ui-block-b')
+                .addClass('profile')
                 .append(
-                $('<a>')
-                    .addClass('pull-left')
-                    .attr('href', '/users/show/' + username)
+                $('<span>')
                     .html(firstname + ' ' + lastname)
             ).append(
                 $('<span>')
                     .addClass('date')
-                    .html(', le ' + date + ' à ' + time)
+                    .html('le ' + date + ' à ' + time)
             ).append(
                 $('<p>')
+                    .addClass('content')
                     .html(comment)
             )
         )
     );
 
-    app.tools.loadGravatar();
+    mobile.tools.loadGravatar();
 };

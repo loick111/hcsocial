@@ -5,7 +5,18 @@
 {% endblock %}
 
 {% block content %}
-
+    <form method="post" action="/users/signin" id="form-signin">
+        <img src="/public/img/hcsocial.png" class="login-img">
+        <h2>Inscription</h2>
+        <input type="text" name="username" placeholder="Nom d'utilisateur">
+        <input type="text" name="mail" placeholder="Adresse mail">
+        <input type="text" name="firstname" placeholder="Prénom">
+        <input type="text" name="lastname" placeholder="Nom">
+        <input type="password" name="password" placeholder="Mot de passe">
+        <input type="password" name="password2" placeholder="Mot de passe (confirmation)">
+        <button type="submit">Inscription</button>
+        <p>Déjà inscrit ? <a id="login">C'est ici !</a></p>
+    </form>
 {% endblock %}
 
 {% block js %}

@@ -38,7 +38,8 @@ mobile.news.load = function () {
                     data[news].message
                 );
 
-                //mobile.news.comments.load(data[news].id);
+                mobile.news.comments.load(data[news].id);
+                mobile.forms.addComments(data[news].id);
                 mobile.news.hide(data[news].id);
                 mobile.news.like(data[news].id);
             }
@@ -211,6 +212,7 @@ mobile.news._create = function createNews(update, id, admin, username, mail, ful
                 ).append(
                     $('<div>')
                         .addClass('ui-block-b')
+                        .addClass('profile')
                         .append(
                         $('<span>')
                             .html(fullname)
@@ -252,8 +254,30 @@ mobile.news._create = function createNews(update, id, admin, username, mail, ful
                     .addClass('comments-display')
                     .html('Afficher les commentaires')
             )
-        )
+        ).append(
+            $('<div>')
+                .addClass('ui-bar')
+                .addClass('ui-bar-a')
+                .addClass('comments')
+        ).append(
+            $('<div>')
+                .addClass('ui-bar')
+                .addClass('ui-bar-a')
+                .append(
+                $('<form>')
+                    .attr('action', '/comments/add/' + id)
+                    .attr('method', 'post')
+                    .append(
+                    $('<input>')
+                        .attr('type', 'text')
+                        .attr('name', 'message')
+                        .attr('placeholder', 'Écrire un commentaire...')
+                    )
+                )
+
+            )
     );
 
+    $('.ui-page').trigger('create');
     mobile.tools.loadGravatar();
 };
