@@ -44,8 +44,6 @@ mobile.news.comments.load = function (newsId) {
                         data.comments[comments].message
                     );
                 }
-
-                mobile.news.comments.displayToggle(newsId);
             }
         },
         function () {

@@ -39,6 +39,7 @@ mobile.news.load = function () {
                 );
 
                 mobile.news.comments.load(data[news].id);
+                mobile.news.comments.displayToggle(data[news].id);
                 mobile.forms.addComments(data[news].id);
                 mobile.news.hide(data[news].id);
                 mobile.news.like(data[news].id);
